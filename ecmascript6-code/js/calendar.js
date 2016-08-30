@@ -9,8 +9,11 @@ import {render} from 'react-dom';
 import {List, ListItem} from 'material-ui/List';
 import Dialog from 'material-ui/Dialog';
 
+
+
 const MAX_WIDTH_MOBILE_VIEW = 750;
-const BACKGROUND_COLOR = '#231F20'
+const BACKGROUND_COLOR = '#1A1314'
+const HIGHLIGHT_COLOR = '#41D6C3'
 
 export default class Calendar extends React.Component 
 {
@@ -20,6 +23,7 @@ export default class Calendar extends React.Component
 		this.handleResize = this.handleResize.bind(this);
 
 		var calendarID = 'p2s62j1glcm2of7co1qoumio84@group.calendar.google.com';
+		//var calendarID = 'texaspse@gmail.com';
         var key = 'AIzaSyBPmI2uj1LjQ30oI0lCKKMK8IoF25AyoOo'
         var url = 'https://www.googleapis.com/calendar/v3/calendars/' + calendarID + '/events?key=' + key;
 
@@ -29,6 +33,7 @@ export default class Calendar extends React.Component
         		result: result,
         	})
         })
+
 	}
 
 
@@ -70,22 +75,27 @@ export default class Calendar extends React.Component
 
 			const actions = [
 		      <FlatButton
+		      	backgroundColor = {HIGHLIGHT_COLOR}
+		      	labelStyle = {{fontWeight:'bold',color:'#fff'}}
 		        label="Got it"
+		        hoverColor={'#9CCC65'}
 		        primary={true}
 		        onTouchTap={close}
 		      />,];
 
 		    return <div>
 		        <Dialog
+		          titleStyle={{color: HIGHLIGHT_COLOR}}
 		          title={event.eventName}
 		          actions={actions}
 		          modal={false}
 		          open={true}>
-		          <div>
+
+		          <div style={{color:'white'}}>
 		          	<p>{'Date: ' + moment(event.startDate).format('MMMM Do YYYY')}</p>
 		          	<p>{'Time: ' + moment(event.startDate).format('h:mm') + ' - ' + moment(event.endDate).format('h:mm a')}</p>
 		          	<p>{'Location: ' + (event.location || '')}</p>
-		          	<p>{'Description: ' + (event.description || '')}</p>
+		          	<p>{(event.description || '')}</p>
 		          </div>
 		        </Dialog>
 		    </div>
@@ -108,7 +118,7 @@ export default class Calendar extends React.Component
 							<RaisedButton label={moment(addMonth(this.state.date, -1)).format('MMMM')} onTouchTap={() => {this.incrementMonth(-1)}}/>
 						</div>
 						<div style={columnFlexBox}>
-							<h2>{moment(this.state.date).format('MMMM, YYYY')}</h2>
+							<h2>{moment(this.state.date).format('MMMM YYYY')}</h2>
 						</div>
 						<div style={columnFlexBox}>
 							<RaisedButton label={moment(addMonth(this.state.date, 1)).format('MMMM')} onTouchTap={() => {this.incrementMonth(1)}}/>
@@ -116,7 +126,7 @@ export default class Calendar extends React.Component
 					</div>
 					<div style={{display: 'flex', justifyContent: 'space-around', width: '100%', height: 40, color: 'inherit'}}>
 						{
-							['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map((w) => {return <p>{w}</p>})
+							['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map((w) => {return <p>{w}</p>})
 						}
 					</div>
 					<div style={{width: '100%'}}>
@@ -127,15 +137,16 @@ export default class Calendar extends React.Component
 								{
 									row.map((day, dayIndex) => {
 										const monthOfCell = getMonthFromCalendarCell(day, rowIndex, this.state.date).getMonth();
-										const numberColor = monthOfCell === this.state.date.getMonth() ? 'white' : '#d9d9d9';
+										const numberColor = monthOfCell === this.state.date.getMonth() ? 'white' : '#737373';
 										const dateOfCell = new Date(this.state.date);
 										dateOfCell.setDate(day);
 										dateOfCell.setMonth(monthOfCell);
 										const eventsInCell = events.filter((event) => {
 											return sameDates(event.startDate, dateOfCell);
 										})
-										const backgroundColor = sameDates(new Date(), dateOfCell) ? '#cce6ff' : 'grey'
-										return <div style={{width: (100/7)+'%', border: '1px solid white', backgroundColor}}>
+										const backgroundColor = sameDates(new Date(), dateOfCell) ? '#404040' : BACKGROUND_COLOR
+										const cellBorder = getBorderFromCell(matrix, dayIndex, rowIndex, dateOfCell);
+										return <div style={{...cellBorder, width: (100/7)+'%', backgroundColor}}>
 											<div style={{position: 'relative', width: '100%', height: '100%'}}>
 												{
 													[1].map((x) => {
@@ -164,16 +175,19 @@ export default class Calendar extends React.Component
 		else {
 			const currentDate = new Date();
 			const events = getEventObjectsFromResult(this.state.result, this.state.date);
-			const ALLOWED_TIME_AFTER_CURRENT_DATE = 500 * 24 * 3600 * 1000;
+			const ALLOWED_TIME_AFTER_CURRENT_DATE = 14 * 24 * 3600 * 1000;
+
 			const upcomingEvents = events.filter((event) => {
 				const dateDifference = event.endDate - currentDate;
 				return dateDifference >= 0 && dateDifference <= ALLOWED_TIME_AFTER_CURRENT_DATE
 			})
-			const paperStyle = {width: 800, padding: 10};
-			const centerFlexbox = {display: 'flex', justifyContent: 'space-around', margin: 30}
+			const paperStyle = {width: 800, padding: 10, paddingBottom: 40};
+			const centerFlexbox = {display: 'flex', justifyContent: 'space-around', margin: 30};
+			const title = upcomingEvents.length > 0 ? 'Upcoming Events' : 'No Upcoming Events This Week';
+			const margin = 40; 
 			return <div style={{width: '100%'}}>
 				<DialogShowingEventDetails event={this.state.dialogEvent} close={() => {this.setDialogEvent(null)}}/>
-				<div style={centerFlexbox}><h1>Upcoming Events</h1></div> 
+				<div style={centerFlexbox}><h2>{title}</h2></div> 
 				{
 					upcomingEvents.map((event) => {
 
@@ -182,11 +196,13 @@ export default class Calendar extends React.Component
 
 						return <div style={centerFlexbox}>
 							<Paper style={paperStyle} zDepth={3}>
-								<div style={centerFlexbox}><b>{event.eventName}</b></div>
-					          	<p>{'Date: ' + moment(event.startDate).format('MMMM Do YYYY')}</p>
-					          	<p>{'Time: ' + moment(event.startDate).format('h:mm') + ' - ' + moment(event.endDate).format('h:mm a')}</p>
-					          	{location}
-					          	<RaisedButton label="More" onTouchTap={()=>{this.setDialogEvent(event)}}/>
+								<div style={centerFlexbox}><h3 style={{color: HIGHLIGHT_COLOR}}>{event.eventName}</h3></div>
+								<div style={{marginLeft:'40px'}}>
+						          	<p>{'Date: ' + moment(event.startDate).format('MMMM Do YYYY')}</p>
+						          	<p>{'Time: ' + moment(event.startDate).format('h:mm') + ' - ' + moment(event.endDate).format('h:mm a')}</p>
+						          	{location}
+					          	</div>
+					          	<RaisedButton style={{marginLeft:'40px'}} backgroundColor = {HIGHLIGHT_COLOR} labelStyle = {{fontWeight:'bold',color:'#fff'}} hoverColor={'#9CCC65'} label="More" onTouchTap={()=>{this.setDialogEvent(event)}}/>
 							</Paper>
 						</div>
 					})
@@ -200,11 +216,11 @@ export default class Calendar extends React.Component
 const EventInCell = ({event, onClick}) => {
 	const divStyle = {display: 'auto', padding: 5}
 	const style = {margin: 5}
-	var name = <b><div style={divStyle}>{'No Name'}</div></b>
+	var name = <b><div style={{...divStyle, color: HIGHLIGHT_COLOR}}>{'No Name'}</div></b>
 	if (event.eventName)
-		name = <b><div style={divStyle}>{event.eventName}</div></b>
+		name = <b><div style={{...divStyle, color: HIGHLIGHT_COLOR}}>{event.eventName}</div></b>
 	else if (event.description)
-		name = <b><div style={divStyle}>event.description</div></b>
+		name = <b><div style={{...divStyle, color: HIGHLIGHT_COLOR}}>event.description</div></b>
 	
 	const dateStr = <div style={divStyle}>{moment(event.startDate).format('h:mm') + ' - ' + moment(event.endDate).format('h:mm a')}</div>;
 
@@ -223,6 +239,29 @@ const EventInCell = ({event, onClick}) => {
 
 function isMobileDevice(){
 	return window.innerWidth <= MAX_WIDTH_MOBILE_VIEW || screen.width <= 480;
+}
+
+function getBorderFromCell(matrix, dayIndex, rowIndex, cellDate) {
+	const cellBorder = sameDates(new Date(), cellDate) ? '1px solid ' + HIGHLIGHT_COLOR : '1px solid grey';
+	if (sameDates(new Date(), cellDate)) {
+		return {borderLeft: cellBorder, borderTop: cellBorder, borderRight: cellBorder, borderBottom: cellBorder}
+	}
+	var style = {borderLeft: cellBorder, borderTop: cellBorder};
+	if (dayIndex === matrix[0].length - 1)
+		style = {...style, borderRight: cellBorder}
+	if (rowIndex === matrix.length - 1)
+		style = {...style, borderBottom: cellBorder}
+	if (new Date().getMonth() === cellDate.getMonth()) {
+		if (sameDates(new Date(), addDate(cellDate, -1)))
+			style={...style, borderLeft: '0px solid grey'}
+		if (sameDates(new Date(), addDate(cellDate, -7)))
+			style={...style, borderTop: '0px solid grey'}
+		if (sameDates(new Date(), addDate(cellDate, 1)))
+			style={...style, borderRight: '0px solid grey'}
+		if (sameDates(new Date(), addDate(cellDate, 7)))
+			style={...style, borderBottom: '0px solid grey'}
+	}
+	return style; 
 }
 
 function getMonthFromCalendarCell(day, rowIndex, currentDate) {
@@ -364,6 +403,12 @@ function zero2D(rows, cols) {
 function addMonth(date, increment) {
 	var d = new Date(date);
 	d.setMonth(d.getMonth() + increment);
+	return d;
+}
+
+function addDate(date, increment) {
+	var d = new Date(date);
+	d.setDate(d.getDate() + increment);
 	return d;
 }
 
