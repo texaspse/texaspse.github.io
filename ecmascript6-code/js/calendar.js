@@ -70,7 +70,7 @@ export default class Calendar extends React.Component
 
 			const actions = [
 		      <FlatButton
-		        label="Got It"
+		        label="Got it"
 		        primary={true}
 		        onTouchTap={close}
 		      />,];
