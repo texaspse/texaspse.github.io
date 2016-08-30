@@ -81,7 +81,7 @@
 						<article>
 							<!-- <a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a> -->
 							<i class="fa fa-graduation-cap fa-5x doers-icons" aria-hidden="true"></i>
-							<div id="article-description">
+							<div class="article-description">
 							<header>
 								<h3><a href="#" class="hvr-underline-from-center">Workshops</a></h3>
 							</header>
@@ -92,7 +92,7 @@
 						<article>
 							<!-- <a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a> -->
 							<i class="fa fa-paper-plane-o fa-5x doers-icons" aria-hidden="true"></i>
-							<div id="article-description">
+							<div class="article-description">
 							<header>
 								<h3><a href="#" class="hvr-underline-from-center">General Meetings</a></h3>
 							</header>
@@ -104,7 +104,7 @@
 							<!-- <a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a> -->
 							<i class="fa fa-users fa-5x doers-icons" aria-hidden="true"></i>
 
-							<div id="article-description">
+							<div class="article-description">
 							<header>
 								<h3><a href="#" class="hvr-underline-from-center">Meetups &amp; Social Events</a></h3>
 							</header>
@@ -246,7 +246,6 @@
 						<div style="margin:12px 0"><table><tbody><tr><td dir="ltr" style="margin-bottom:1.5em;vertical-align:middle;margin-left:0;margin-top:0;max-width:100%;">
 						<center>
 							<input type="submit" name="submit" value="Submit" style="
-							    width: 50%;
 							    font-size: 30px;
 							    font-weight: bold;">
 						</center>
@@ -587,6 +586,22 @@ particlesJS("header", {
   },
   "retina_detect": true
 });
+</script>
+
+<script>
+/*Fix for the height consistency in the What We Do section. All it does it iterate through items of class="article-description", find the max height of all items, and set all items to that new max height */
+var articleDesc = document.getElementsByClassName("article-description");
+
+/* Get the max height of all divs */
+var maxHeight = 0;
+for (i = 0; i < articleDesc.length; i++) {
+	if (articleDesc[i].clientHeight >= maxHeight){
+		maxHeight = articleDesc[i].clientHeight;
+	}
+}
+for (i = 0; i < articleDesc.length; i++) {
+	articleDesc[i].style.height = maxHeight.toString() + 'px';
+}
 </script>
 	</body>
 
