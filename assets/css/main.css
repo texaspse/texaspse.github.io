@@ -1892,6 +1892,22 @@
 			padding-left: 0.25em;
 		}
 
+/*Featured Icons*/
+
+.doers-icons{
+	color:white;
+	padding-top:.5em;
+	padding-bottom: .5em;
+}
+
+.doers-icons:before {
+  font-size: 72px;
+  background: -webkit-gradient(linear, left top, right bottom, from(#FF5F6D), to(#FFC371));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: initial; /* reset Font Awesome's display:inline-block */
+}​
+
 /* Form */
 
 	#form-aria-label {
