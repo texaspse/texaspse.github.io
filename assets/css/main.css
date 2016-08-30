@@ -214,6 +214,8 @@
 			width: 100% !important;
 		}
 
+		#bann
+
 	}
 
 /* Grid */
@@ -1731,9 +1733,12 @@
 	}
 
 	header {
-		margin: 0 0 1em 0;
+		margin: 0 1em 1em 1em;
 	}
 
+	#banner header {
+		height: 250px;
+	}
 		header > p {
 			display: block;
 			font-size: 1.5em;
@@ -1747,7 +1752,7 @@
 	}
 
 	#article-description {
-		height: 200px;
+		height: 250px;
 	}
 
 
