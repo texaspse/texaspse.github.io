@@ -8,9 +8,7 @@ import moment from 'moment'
 import {render} from 'react-dom';
 import {List, ListItem} from 'material-ui/List';
 import Dialog from 'material-ui/Dialog';
-
-
-
+import TextField from 'material-ui/TextField';
 const MAX_WIDTH_MOBILE_VIEW = 750;
 const BACKGROUND_COLOR = '#1A1314'
 const HIGHLIGHT_COLOR = '#41D6C3'
