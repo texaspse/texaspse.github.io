@@ -10,10 +10,10 @@ import moment from 'moment'
 import {render} from 'react-dom';
 import {List, ListItem} from 'material-ui/List';
 import Dialog from 'material-ui/Dialog';
-import MenuItem from 'material-ui/MenuItem';
-import FileFileDownload from 'material-ui/svg-icons/file/file-download';
 import TextField from 'material-ui/TextField';
+import FileFileDownload from 'material-ui/svg-icons/file/file-download';
 import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
 import Popover from 'material-ui/Popover';
 
 const MAX_WIDTH_MOBILE_VIEW = 750;
@@ -273,14 +273,17 @@ export default class Calendar extends React.Component
 					upcomingEvents.map((event) => {
 						const key = event.id + event.startDate.getDate()
 						console.log({key, state:this.state})
+
 						const bStyle = {color: 'white'}
 						const isExpanded = this.state.extendedEventDesc.get(key) === true
 						const location = event.location ? <p><b style={bStyle}>{'Location: '}</b>{event.location}</p> : <div></div>
 						const description = isExpanded ? <p><b style={bStyle}>{'Description: '}</b>{(event.description || 'None Available')}</p> : <div></div>
 
+
 						return <div style={centerFlexbox}>
 							<Paper style={paperStyle} zDepth={3}>
 								<div style={centerFlexbox}><h3 style={{color: HIGHLIGHT_COLOR}}>{event.eventName}</h3></div>
+
 								<div style={{marginLeft:'10px'}}>
 						          	<p><b style={bStyle}>{'Date: '}</b>{moment(event.startDate).format('dddd, MMMM Do YYYY')}</p>
 						          	<p><b style={bStyle}>{'Time: '}</b>{moment(event.startDate).format('h:mm') + ' - ' + moment(event.endDate).format('h:mm a')}</p>
@@ -290,6 +293,7 @@ export default class Calendar extends React.Component
 					          	<div style={{display: 'flex', justifyContent: 'flex-end'}}>
 					          	<RaisedButton style={{marginLeft:'10px'}} backgroundColor = {HIGHLIGHT_COLOR} labelStyle = {{color:'#fff', fontSize:'16px'}} hoverColor={'#9CCC65'} label={isExpanded ? "Less" : "More"} onTouchTap={()=>{this.toggleExtendedEventDesc(key)}}/>
 								</div>
+
 							</Paper>
 						</div>
 					})
