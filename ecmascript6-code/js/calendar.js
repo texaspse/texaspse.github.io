@@ -1,18 +1,20 @@
 import React from 'react'
+import IconMenu from 'material-ui/IconMenu';
 import $ from 'jquery'
 import RRule from 'rrule'
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton';
 import Paper from 'material-ui/Paper';
 import moment from 'moment'
 import {render} from 'react-dom';
 import {List, ListItem} from 'material-ui/List';
 import Dialog from 'material-ui/Dialog';
-import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-import IconButton from 'material-ui/IconButton'
 import FileFileDownload from 'material-ui/svg-icons/file/file-download';
-
+import TextField from 'material-ui/TextField';
+import Menu from 'material-ui/Menu';
+import Popover from 'material-ui/Popover';
 
 const MAX_WIDTH_MOBILE_VIEW = 750;
 const BACKGROUND_COLOR = '#1A1314'
@@ -20,10 +22,14 @@ const HIGHLIGHT_COLOR = '#41D6C3'
 
 export default class Calendar extends React.Component 
 {
-	constructor(){
-		super();
+	constructor(props){
+
+		super(props);
 		const self = this;
 		this.handleResize = this.handleResize.bind(this);
+	    this.state = {
+	      open: false,
+	    };
 
 		var calendarID = 'p2s62j1glcm2of7co1qoumio84@group.calendar.google.com';
 		//var calendarID = 'texaspse@gmail.com';
@@ -55,9 +61,19 @@ export default class Calendar extends React.Component
     	date: new Date(),
     	result: null,
     	dialogEvent: null,
-    	mobileView: isMobileDevice(),})
+    	mobileView: isMobileDevice(),
+    	extendedEventDesc: new Map(),
+    	typeOfCalendarInstruction: null})
     window.addEventListener('resize', this.handleResize);
   }
+
+
+  setTypeOfCalendarInstruction(type){
+  	this.setState({
+  		typeOfCalendarInstruction: type,
+  	})
+  }
+
 
   setDialogEvent(event) {
   	this.setState({
@@ -71,16 +87,47 @@ export default class Calendar extends React.Component
 	  	});
 	  }
 
+	  toggleExtendedEventDesc(key){
+	  	const map = this.state.extendedEventDesc;
+	  	map.set(key, !map.get(key))
+	  	this.setState({
+	  		extendedEventDesc: map,
+	  	})
+	  }
+
+
+
+  handleTouchTap(event){
+    // This prevents ghost click.
+    event.preventDefault();
+
+    this.setState({
+      open: true,
+      anchorEl: event.currentTarget,
+    })
+  };
+
+    handleRequestClose(){
+    this.setState({
+      open: false,
+    });
+  };
+
+
 	render() 
 	{
-		const DialogShowingEventDetails = ({event, close}) => {
-			if (!event) return <div></div>;
+		console.log('state')
+		console.log(this.state)
 
+
+		const DialogShowingEventDetails = ({event, close}) => {
+			console.log('blah2')
+			if (!event) return <div></div>;
 			const actions = [
-		      <FlatButton
+			<FlatButton
 		      	backgroundColor = {HIGHLIGHT_COLOR}
-		      	labelStyle = {{fontWeight:'bold',color:'#fff'}}
-		        label="Got it"
+		      	labelStyle = {{color:'#fff', fontSize:'18px'}}
+		        label="Got It!"
 		        hoverColor={'#9CCC65'}
 		        primary={true}
 		        onTouchTap={close}
@@ -90,6 +137,7 @@ export default class Calendar extends React.Component
 		    return <div>
 		        <Dialog
 		          titleStyle={{color: HIGHLIGHT_COLOR}}
+		          actionsContainerStyle={{paddingBottom:'20px', paddingRight:'20px'}}
 		          title={event.eventName}
 		          actions={actions}
 		          modal={false}
@@ -117,10 +165,13 @@ export default class Calendar extends React.Component
 			return (
 				<div style={{color: 'white', backgroundColor: BACKGROUND_COLOR, width: '100%', padding: 10, maxHeight: 1000, overflowY: 'auto'}}>
 					<DialogShowingEventDetails event={this.state.dialogEvent} close={() => {this.setDialogEvent(null)}}/>
+					<CalendarInstruction type={this.state.typeOfCalendarInstruction} cancel={() => {this.setTypeOfCalendarInstruction(null);}}/>
+
 					<div style={{display: 'flex', justifyContent: 'space-between', width: '100%',}}>
 						<div style={columnFlexBox}>
 							<RaisedButton label={moment(addMonth(this.state.date, -1)).format('MMMM')} onTouchTap={() => {this.incrementMonth(-1)}}/>
 						</div>
+
 						<div style={columnFlexBox}>
 							<h2>{moment(this.state.date).format('MMMM YYYY')}</h2>
 						</div>
@@ -173,13 +224,39 @@ export default class Calendar extends React.Component
 						})
 					}
 					</div>
+
+
+		      <div style={columnFlexBox}>
+		        <RaisedButton
+		          onTouchTap={(event) => {this.handleTouchTap(event)}}
+		          label="SUBSCRIBE TO THIS CALENDAR"
+
+		        />
+		        <Popover
+				  open={this.state.open}
+		          anchorEl={this.state.anchorEl}
+		          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+		          targetOrigin={{horizontal: 'left', vertical: 'top'}}
+	              onRequestClose={() => {this.handleRequestClose()}}
+		        >
+		          <Menu>
+		            <MenuItem primaryText="Google Calendar" onTouchTap={() => {window.open("https://calendar.google.com/calendar/render?cid=p2s62j1glcm2of7co1qoumio84@group.calendar.google.com&pli=1#main_7")}}/>
+		            <MenuItem primaryText="iCalendar" onTouchTap={() => {this.setTypeOfCalendarInstruction('iCalendar'); this.handleRequestClose();}}/>
+		            <MenuItem primaryText="Outlook" onTouchTap={() => {this.setTypeOfCalendarInstruction('Outlook'); this.handleRequestClose();}}/>
+		            <MenuItem primaryText="Outlook Online" onTouchTap={() => {this.setTypeOfCalendarInstruction('Outlook Online'); this.handleRequestClose();}}/>
+		            <MenuItem primaryText="Yahoo Online" onTouchTap={() => {this.setTypeOfCalendarInstruction('Yahoo Online'); this.handleRequestClose();}}/>
+		            <MenuItem primaryText="Other" onTouchTap={() => {this.setTypeOfCalendarInstruction('Other'); this.handleRequestClose();}}/>
+		          </Menu>
+		        </Popover>
+		      </div>
+
 				</div>
 			);
 		}
 		else {
 			const currentDate = new Date();
 			const events = getEventObjectsFromResult(this.state.result, this.state.date);
-			const ALLOWED_TIME_AFTER_CURRENT_DATE = 14 * 24 * 3600 * 1000;
+			const ALLOWED_TIME_AFTER_CURRENT_DATE = 7 * 24 * 3600 * 1000;
 
 			const upcomingEvents = events.filter((event) => {
 				const dateDifference = event.endDate - currentDate;
@@ -194,19 +271,25 @@ export default class Calendar extends React.Component
 				<div style={centerFlexbox}><h2>{title}</h2></div> 
 				{
 					upcomingEvents.map((event) => {
-
-						const location = event.location ? <p>{'Location: ' + event.location}</p> : <div></div>
-						//const description = event.description ? <p>{'Description: ' + event.description}</p> : <div></div>
+						const key = event.id + event.startDate.getDate()
+						console.log({key, state:this.state})
+						const bStyle = {color: 'white'}
+						const isExpanded = this.state.extendedEventDesc.get(key) === true
+						const location = event.location ? <p><b style={bStyle}>{'Location: '}</b>{event.location}</p> : <div></div>
+						const description = isExpanded ? <p><b style={bStyle}>{'Description: '}</b>{(event.description || 'None Available')}</p> : <div></div>
 
 						return <div style={centerFlexbox}>
 							<Paper style={paperStyle} zDepth={3}>
 								<div style={centerFlexbox}><h3 style={{color: HIGHLIGHT_COLOR}}>{event.eventName}</h3></div>
-								<div style={{marginLeft:'40px'}}>
-						          	<p>{'Date: ' + moment(event.startDate).format('MMMM Do YYYY')}</p>
-						          	<p>{'Time: ' + moment(event.startDate).format('h:mm') + ' - ' + moment(event.endDate).format('h:mm a')}</p>
+								<div style={{marginLeft:'10px'}}>
+						          	<p><b style={bStyle}>{'Date: '}</b>{moment(event.startDate).format('dddd, MMMM Do YYYY')}</p>
+						          	<p><b style={bStyle}>{'Time: '}</b>{moment(event.startDate).format('h:mm') + ' - ' + moment(event.endDate).format('h:mm a')}</p>
 						          	{location}
+						          	{description}
 					          	</div>
-					          	<RaisedButton style={{marginLeft:'40px'}} backgroundColor = {HIGHLIGHT_COLOR} labelStyle = {{fontWeight:'bold',color:'#fff'}} hoverColor={'#9CCC65'} label="More" onTouchTap={()=>{this.setDialogEvent(event)}}/>
+					          	<div style={{display: 'flex', justifyContent: 'flex-end'}}>
+					          	<RaisedButton style={{marginLeft:'10px'}} backgroundColor = {HIGHLIGHT_COLOR} labelStyle = {{color:'#fff', fontSize:'16px'}} hoverColor={'#9CCC65'} label={isExpanded ? "Less" : "More"} onTouchTap={()=>{this.toggleExtendedEventDesc(key)}}/>
+								</div>
 							</Paper>
 						</div>
 					})
@@ -215,6 +298,140 @@ export default class Calendar extends React.Component
 		}
 
 	}
+}
+
+const CalendarInstruction = ({type, cancel}) => {
+	console.log('blah')
+	const isCalendarDialogueVisible = (type !== null)
+	if (isCalendarDialogueVisible == false){
+		return <div></div>
+	}
+
+	const actions = [
+    <FlatButton
+    	onTouchTap={cancel}
+      	backgroundColor = {HIGHLIGHT_COLOR}
+      	labelStyle = {{color:'#fff', fontSize:'18px'}}
+        label="Done"
+        hoverColor={'#9CCC65'}
+        primary={true}
+	  />
+	  ];
+
+	 if (type == 'Outlook Online'){
+		return <div>
+		<Dialog
+		  titleStyle={{color: HIGHLIGHT_COLOR}}
+		  actionsContainerStyle={{paddingBottom:'20px', paddingRight:'20px'}}
+		  title={'Instructions To Subscribe To Texas PSE Calendar Using Outlook Web App'}
+		  actions={actions}
+		  modal={false}
+		  open={isCalendarDialogueVisible}>
+
+		  <div style={{color:'white'}}>
+			<p>{'1. In your Outlook Calendar client, click Add Calendar > From internet'}</p>
+			<p>2. Copy &amp; past the following link:</p> 
+			<p>https://calendar.google.com/calendar/ical/p2s62j1glcm2of7co1qoumio84%40group.calendar.google.com/public/basic.ics</p>
+			<p>3. Enter a Calendar Name (optional). </p>
+			<p>4. Click "OK" when finished. </p>
+		  </div>
+		</Dialog>
+		</div>
+	 }
+ 	 else if (type == 'Yahoo Online'){
+	 	return <div>
+		<Dialog
+		  titleStyle={{color: HIGHLIGHT_COLOR}}
+		  actionsContainerStyle={{paddingBottom:'20px', paddingRight:'20px'}}
+		  title={'Instructions To Subscribe To Texas PSE Calendar Using Yahoo'}
+		  actions={actions}
+		  modal={false}
+		  open={isCalendarDialogueVisible}>
+
+		  <div style={{color:'white'}}>
+			<ol>
+			<p>{'1. In Yahoo Mail, click the Calendar icon'}</p> 
+			<p>2. Mouse over "Others," click the Manage Followed Calendars icon</p> 
+			<p>3. Select Follow Other Calendars</p> 
+			<p>4. Enter a name for your calendar</p> 
+			<p>5. Enter the following iCal address.</p>
+			<p>https://calendar.google.com/calendar/ical/p2s62j1glcm2of7co1qoumio84%40group.calendar.google.com/public/basic.ics</p>
+			<p>6. Select a color for the calendar</p> 
+			<p>7. Select Refresh and Remind options</p> 			
+			<p>8. Click Continue</p> 
+			</ol>
+		  </div>
+		</Dialog>
+		</div>
+	 }
+
+	 else if (type == 'Outlook'){
+	 	return <div>
+		<Dialog
+		  titleStyle={{color: HIGHLIGHT_COLOR}}
+		  actionsContainerStyle={{paddingBottom:'20px', paddingRight:'20px'}}
+		  title={'Instructions To Subscribe To Texas PSE Calendar Using Outlook'}
+		  actions={actions}
+		  modal={false}
+		  open={isCalendarDialogueVisible}>
+
+		  <div style={{color:'white'}}>
+			<ol>
+			<p>{'1. In your Outlook Calendar client, click Open Calendar > From Internet...'}</p>
+			<p>2. Copy &amp; past the following link:</p> 
+			<p>https://calendar.google.com/calendar/ical/p2s62j1glcm2of7co1qoumio84%40group.calendar.google.com/public/basic.ics</p>
+			<p>3. Click Add. </p>
+			<p>4. Click "Save" when finished. </p>
+			</ol>
+		  </div>
+		</Dialog>
+		</div>
+	 }
+	 else if (type == 'iCalendar'){
+	 	return <div>
+		<Dialog
+		  titleStyle={{color: HIGHLIGHT_COLOR}}
+		  actionsContainerStyle={{paddingBottom:'20px', paddingRight:'20px'}}
+		  title={'Instructions To Subscribe To Texas PSE Calendar Using iOS Calendar'}
+		  actions={actions}
+		  modal={false}
+		  open={isCalendarDialogueVisible}>
+
+		  <div style={{color:'white'}}>
+			<ol>
+			<p>{'1. In Calendar, choose File > New Calendar Subscription.'}</p>
+			<p>2. Copy &amp; past the following link:</p> 
+			<p>https://calendar.google.com/calendar/ical/p2s62j1glcm2of7co1qoumio84%40group.calendar.google.com/public/basic.ics</p>
+			<p>3. Click Subscribe.</p>
+			<p>4. Enter a name for the calendar in the Name field and choose a color from the adjacent pop-up menu.</p>
+			<p>5. Click OK.</p>
+			</ol>
+		  </div>
+		</Dialog>
+		</div>
+	 }
+
+	 else{
+		return <div>
+		<Dialog
+		  titleStyle={{color: HIGHLIGHT_COLOR}}
+		  actionsContainerStyle={{paddingBottom:'20px', paddingRight:'20px'}}
+		  title={'Instructions To Subscribe To Texas PSE Calendar'}
+		  actions={actions}
+		  modal={false}
+		  open={isCalendarDialogueVisible}>
+
+		  <div style={{color:'white'}}>
+		  <p>Please use the following address to access your calendar from other applications. You can copy and paste this into any calendar product that supports the iCal format.
+		  </p>
+		  <p>https://calendar.google.com/calendar/ical/p2s62j1glcm2of7co1qoumio84%40group.calendar.google.com/public/basic.ics
+		  </p>
+
+		  </div>
+		</Dialog>
+		</div>
+	 }
+
 }
 
 const EventInCell = ({event, onClick}) => {
@@ -329,9 +546,10 @@ function cancelEvent(events, item) {
 }
 
 function getEventsFromRRule(events, item, maxDate, minDate) {
-	var options = RRule.parseString(item.recurrence[0].replace('RRULE:', ''))
-	options.dtstart = (moment(item.start.dateTime).toDate())
-	var rule = new RRule(options)
+
+	var options = RRule.parseString(item.recurrence[0].replace('RRULE:', ''));
+	options.dtstart = moment(item.start.dateTime).toDate();
+	var rule = new RRule(options);
     var dates = rule.between(minDate, maxDate);
     console.log({rule: item.recurrence[0], dates})
     const formattedItem = format(item);
