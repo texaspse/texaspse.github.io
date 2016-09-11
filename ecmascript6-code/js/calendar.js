@@ -8,7 +8,10 @@ import moment from 'moment'
 import {render} from 'react-dom';
 import {List, ListItem} from 'material-ui/List';
 import Dialog from 'material-ui/Dialog';
-
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton'
+import FileFileDownload from 'material-ui/svg-icons/file/file-download';
 
 
 const MAX_WIDTH_MOBILE_VIEW = 750;
@@ -81,7 +84,8 @@ export default class Calendar extends React.Component
 		        hoverColor={'#9CCC65'}
 		        primary={true}
 		        onTouchTap={close}
-		      />,];
+		      />,
+		      ];
 
 		    return <div>
 		        <Dialog
@@ -256,7 +260,7 @@ function getBorderFromCell(matrix, dayIndex, rowIndex, cellDate) {
 			style={...style, borderLeft: '0px solid grey'}
 		if (sameDates(new Date(), addDate(cellDate, -7)))
 			style={...style, borderTop: '0px solid grey'}
-		if (sameDates(new Date(), addDate(cellDate, 1)))
+		if (sameDates(new Date(), addDate(cellDate, 1)) && dayIndex !== 6)
 			style={...style, borderRight: '0px solid grey'}
 		if (sameDates(new Date(), addDate(cellDate, 7)))
 			style={...style, borderBottom: '0px solid grey'}
@@ -325,8 +329,11 @@ function cancelEvent(events, item) {
 }
 
 function getEventsFromRRule(events, item, maxDate, minDate) {
-	var rule = RRule.fromString(item.recurrence[0].replace('RRULE:', ''))
+	var options = RRule.parseString(item.recurrence[0].replace('RRULE:', ''))
+	options.dtstart = (moment(item.start.dateTime).toDate())
+	var rule = new RRule(options)
     var dates = rule.between(minDate, maxDate);
+    console.log({rule: item.recurrence[0], dates})
     const formattedItem = format(item);
     const startMin = formattedItem.startDate.getMinutes();
     const startHour = formattedItem.startDate.getHours();
