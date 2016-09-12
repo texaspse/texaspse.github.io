@@ -132,7 +132,6 @@ export default class Calendar extends React.Component
 		        primary={true}
 		        onTouchTap={close}
 		      />,
-
 		      ];
 
 		    return <div>
@@ -257,7 +256,7 @@ export default class Calendar extends React.Component
 		else {
 			const currentDate = new Date();
 			const events = getEventObjectsFromResult(this.state.result, this.state.date);
-			const ALLOWED_TIME_AFTER_CURRENT_DATE = 14 * 24 * 3600 * 1000;
+			const ALLOWED_TIME_AFTER_CURRENT_DATE = 7 * 24 * 3600 * 1000;
 
 			const upcomingEvents = events.filter((event) => {
 				const dateDifference = event.endDate - currentDate;
@@ -274,20 +273,27 @@ export default class Calendar extends React.Component
 					upcomingEvents.map((event) => {
 						const key = event.id + event.startDate.getDate()
 						console.log({key, state:this.state})
-						const location = event.location ? <p>{'Location: ' + event.location}</p> : <div></div>
+
+						const bStyle = {color: 'white'}
 						const isExpanded = this.state.extendedEventDesc.get(key) === true
-						const description = isExpanded ? <p>{'Description: ' + event.description}</p> : <div></div>
+						const location = event.location ? <p><b style={bStyle}>{'Location: '}</b>{event.location}</p> : <div></div>
+						const description = isExpanded ? <p><b style={bStyle}>{'Description: '}</b>{(event.description || 'None Available')}</p> : <div></div>
+
 
 						return <div style={centerFlexbox}>
 							<Paper style={paperStyle} zDepth={3}>
 								<div style={centerFlexbox}><h3 style={{color: HIGHLIGHT_COLOR}}>{event.eventName}</h3></div>
-								<div style={{marginLeft:'40px'}}>
-						          	<p>{'Date: ' + moment(event.startDate).format('dddd, MMMM Do YYYY')}</p>
-						          	<p>{'Time: ' + moment(event.startDate).format('h:mm') + ' - ' + moment(event.endDate).format('h:mm a')}</p>
+
+								<div style={{marginLeft:'10px'}}>
+						          	<p><b style={bStyle}>{'Date: '}</b>{moment(event.startDate).format('dddd, MMMM Do YYYY')}</p>
+						          	<p><b style={bStyle}>{'Time: '}</b>{moment(event.startDate).format('h:mm') + ' - ' + moment(event.endDate).format('h:mm a')}</p>
 						          	{location}
 						          	{description}
 					          	</div>
-					          	<RaisedButton style={{marginLeft:'40px'}} backgroundColor = {HIGHLIGHT_COLOR} labelStyle = {{color:'#fff', fontSize:'16px'}} hoverColor={'#9CCC65'} label={isExpanded ? "Show Less" : "Show More"} onTouchTap={()=>{this.toggleExtendedEventDesc(key)}}/>
+					          	<div style={{display: 'flex', justifyContent: 'flex-end'}}>
+					          	<RaisedButton style={{marginLeft:'10px'}} backgroundColor = {HIGHLIGHT_COLOR} labelStyle = {{color:'#fff', fontSize:'16px'}} hoverColor={'#9CCC65'} label={isExpanded ? "Less" : "More"} onTouchTap={()=>{this.toggleExtendedEventDesc(key)}}/>
+								</div>
+
 							</Paper>
 						</div>
 					})
@@ -475,7 +481,7 @@ function getBorderFromCell(matrix, dayIndex, rowIndex, cellDate) {
 			style={...style, borderLeft: '0px solid grey'}
 		if (sameDates(new Date(), addDate(cellDate, -7)))
 			style={...style, borderTop: '0px solid grey'}
-		if (sameDates(new Date(), addDate(cellDate, 1)))
+		if (sameDates(new Date(), addDate(cellDate, 1)) && dayIndex !== 6)
 			style={...style, borderRight: '0px solid grey'}
 		if (sameDates(new Date(), addDate(cellDate, 7)))
 			style={...style, borderBottom: '0px solid grey'}
@@ -544,10 +550,12 @@ function cancelEvent(events, item) {
 }
 
 function getEventsFromRRule(events, item, maxDate, minDate) {
+
 	var options = RRule.parseString(item.recurrence[0].replace('RRULE:', ''));
 	options.dtstart = moment(item.start.dateTime).toDate();
 	var rule = new RRule(options);
     var dates = rule.between(minDate, maxDate);
+    console.log({rule: item.recurrence[0], dates})
     const formattedItem = format(item);
     const startMin = formattedItem.startDate.getMinutes();
     const startHour = formattedItem.startDate.getHours();
