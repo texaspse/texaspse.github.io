@@ -16,7 +16,7 @@ import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Popover from 'material-ui/Popover';
 
-const MAX_WIDTH_MOBILE_VIEW = 750;
+const MAX_WIDTH_MOBILE_VIEW = 900;
 const BACKGROUND_COLOR = '#1A1314'
 const HIGHLIGHT_COLOR = '#41D6C3'
 
@@ -43,6 +43,14 @@ export default class Calendar extends React.Component
         	})
         })
 
+        $.getJSON('https://api.mlab.com/api/1/databases/test_12345/collections/mynewcollection?apiKey=vELwcWICM9CTv0ZgsaXVOIUvOc4qNAE0', function(result) {
+        	console.log('got result')
+        	console.log(result)
+        	alert(JSON.stringify(result))
+        })
+
+
+
 	}
 
 
@@ -58,7 +66,7 @@ export default class Calendar extends React.Component
     this.state = ({
     	width: window.innerWidth,
     	height: window.innerHeight,
-    	date: new Date(),
+    	date: now(),
     	result: null,
     	dialogEvent: null,
     	mobileView: isMobileDevice(),
@@ -163,7 +171,7 @@ export default class Calendar extends React.Component
 			const height = this.state.height;
 			const matrix = makeMonthMatrix(this.state.date);
 			return (
-				<div style={{color: 'white', backgroundColor: BACKGROUND_COLOR, width: '100%', padding: 10, maxHeight: 1000, overflowY: 'auto'}}>
+				<div style={{color: 'white', backgroundColor: BACKGROUND_COLOR, width: '100%', padding: 10, maxHeight: 2000, overflowY: 'auto'}}>
 					<DialogShowingEventDetails event={this.state.dialogEvent} close={() => {this.setDialogEvent(null)}}/>
 					<CalendarInstruction type={this.state.typeOfCalendarInstruction} cancel={() => {this.setTypeOfCalendarInstruction(null);}}/>
 
@@ -187,8 +195,9 @@ export default class Calendar extends React.Component
 					<div style={{width: '100%'}}>
 					{
 						matrix.map((row, rowIndex) => {
+							const cellHeight = Math.floor(window.innerHeight / 9)
 							return (
-								<div style={{display: 'flex', width: '100%', minHeight: 100,}}>
+								<div style={{display: 'flex', width: '100%', minHeight: cellHeight,}}>
 								{
 									row.map((day, dayIndex) => {
 										const monthOfCell = getMonthFromCalendarCell(day, rowIndex, this.state.date).getMonth();
@@ -199,7 +208,7 @@ export default class Calendar extends React.Component
 										const eventsInCell = events.filter((event) => {
 											return sameDates(event.startDate, dateOfCell);
 										})
-										const backgroundColor = sameDates(new Date(), dateOfCell) ? '#404040' : BACKGROUND_COLOR
+										const backgroundColor = sameDates(now(), dateOfCell) ? '#404040' : BACKGROUND_COLOR
 										const cellBorder = getBorderFromCell(matrix, dayIndex, rowIndex, dateOfCell);
 										return <div style={{...cellBorder, width: (100/7)+'%', backgroundColor}}>
 											<div style={{position: 'relative', width: '100%', height: '100%'}}>
@@ -254,16 +263,20 @@ export default class Calendar extends React.Component
 			);
 		}
 		else {
-			const currentDate = new Date();
+			const currentDate = now();
 			const events = getEventObjectsFromResult(this.state.result, this.state.date);
 			const ALLOWED_TIME_AFTER_CURRENT_DATE = 7 * 24 * 3600 * 1000;
 
 			const upcomingEvents = events.filter((event) => {
 				const dateDifference = event.endDate - currentDate;
 				return dateDifference >= 0 && dateDifference <= ALLOWED_TIME_AFTER_CURRENT_DATE
+			}).sort((a, b) => {
+				return a.startDate - b.startDate;
 			})
-			const paperStyle = {width: 800, padding: 10, paddingBottom: 40};
+			const LEFT_MARGIN = 10
+			const paperStyle = {width: 800, padding: 10};
 			const centerFlexbox = {display: 'flex', justifyContent: 'space-around', margin: 30};
+			const leftFlexbox = {display: 'flex', justifyContent: 'flex-start', margin: LEFT_MARGIN};
 			const title = upcomingEvents.length > 0 ? 'Upcoming Events' : 'No Upcoming Events This Week';
 			const margin = 40; 
 			return <div style={{width: '100%'}}>
@@ -282,9 +295,9 @@ export default class Calendar extends React.Component
 
 						return <div style={centerFlexbox}>
 							<Paper style={paperStyle} zDepth={3}>
-								<div style={centerFlexbox}><h3 style={{color: HIGHLIGHT_COLOR}}>{event.eventName}</h3></div>
+								<div style={leftFlexbox}><h3 style={{color: HIGHLIGHT_COLOR, marginBottom: 10}}>{event.eventName}</h3></div>
 
-								<div style={{marginLeft:'10px'}}>
+								<div style={{marginLeft: LEFT_MARGIN}}>
 						          	<p><b style={bStyle}>{'Date: '}</b>{moment(event.startDate).format('dddd, MMMM Do YYYY')}</p>
 						          	<p><b style={bStyle}>{'Time: '}</b>{moment(event.startDate).format('h:mm') + ' - ' + moment(event.endDate).format('h:mm a')}</p>
 						          	{location}
@@ -467,8 +480,8 @@ function isMobileDevice(){
 }
 
 function getBorderFromCell(matrix, dayIndex, rowIndex, cellDate) {
-	const cellBorder = sameDates(new Date(), cellDate) ? '1px solid ' + HIGHLIGHT_COLOR : '1px solid grey';
-	if (sameDates(new Date(), cellDate)) {
+	const cellBorder = sameDates(now(), cellDate) ? '1px solid ' + HIGHLIGHT_COLOR : '1px solid grey';
+	if (sameDates(now(), cellDate)) {
 		return {borderLeft: cellBorder, borderTop: cellBorder, borderRight: cellBorder, borderBottom: cellBorder}
 	}
 	var style = {borderLeft: cellBorder, borderTop: cellBorder};
@@ -476,14 +489,14 @@ function getBorderFromCell(matrix, dayIndex, rowIndex, cellDate) {
 		style = {...style, borderRight: cellBorder}
 	if (rowIndex === matrix.length - 1)
 		style = {...style, borderBottom: cellBorder}
-	if (new Date().getMonth() === cellDate.getMonth()) {
-		if (sameDates(new Date(), addDate(cellDate, -1)))
+	if (now().getMonth() === cellDate.getMonth()) {
+		if (sameDates(now(), addDate(cellDate, -1)) && dayIndex !== 0)
 			style={...style, borderLeft: '0px solid grey'}
-		if (sameDates(new Date(), addDate(cellDate, -7)))
+		if (sameDates(now(), addDate(cellDate, -7)))
 			style={...style, borderTop: '0px solid grey'}
-		if (sameDates(new Date(), addDate(cellDate, 1)) && dayIndex !== 6)
+		if (sameDates(now(), addDate(cellDate, 1)) && dayIndex !== 6)
 			style={...style, borderRight: '0px solid grey'}
-		if (sameDates(new Date(), addDate(cellDate, 7)))
+		if (sameDates(now(), addDate(cellDate, 7)))
 			style={...style, borderBottom: '0px solid grey'}
 	}
 	return style; 
@@ -651,4 +664,8 @@ function getDayOfWeekOfFirstDay(date) {
 	var d = new Date(date);
 	d.setDate(1);
 	return d.getDay()
+}
+
+function now() {
+	return new Date()
 }
