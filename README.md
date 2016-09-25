@@ -11,3 +11,8 @@ Host for the texaspse.org site
 ### Calendar
 - [React](https://facebook.github.io/react/)
 - [Material-UI](www.material-ui.com)
+
+## Contributors
+
+- Quynh Nguyen (Petroleum Engineering)
+- Mark Metzger (Petroleum Engineering)
