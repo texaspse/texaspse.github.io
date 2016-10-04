@@ -163,13 +163,13 @@ export default class Calendar extends React.Component
 										const eventsInCell = events.filter((event) => {
 											return sameDates(event.startDate, dateOfCell);
 										})
-										const backgroundColor = sameDates(now(), dateOfCell) ? '#404040' : BACKGROUND_COLOR
+										const backgroundColor = sameDates(now(), dateOfCell) ? BACKGROUND_COLOR : BACKGROUND_COLOR
 										const cellBorder = getBorderFromCell(matrix, dayIndex, rowIndex, dateOfCell);
 										return <div style={{...cellBorder, width: (100/7)+'%', backgroundColor}}>
 											<div style={{position: 'relative', width: '100%', height: '100%', paddingTop: 25}}>
 												{
 													[1].map((x) => {
-														if (eventsInCell.length > -1) return <p style={{color: numberColor, position: 'absolute', top: 0, right: 5}}>{day}</p>
+														if (eventsInCell.length > -1) return <p style={{color: numberColor, position: 'absolute', top: 0, right: 5}}>{sameDates(now(), dateOfCell) ? 'Today!' : day}</p>
 													})
 												}
 												{

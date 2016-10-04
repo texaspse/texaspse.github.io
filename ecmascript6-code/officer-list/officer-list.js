@@ -10,6 +10,11 @@ import OfficerProfile from './officer-profile.js'
 import {officerData} from './officer-data.js'
 import {WIDTH, HEIGHT} from './styles.js'
 import InlineOfficerProfile from './officer-profile-inline.js'
+import RaisedButton from 'material-ui/RaisedButton';
+
+export const BACKGROUND_COLOR = '#1A1314'
+export const HIGHLIGHT_COLOR = '#41D6C3'
+const MAX_ROWS = 4
 
 
 export default class OfficerList extends React.Component {
@@ -34,7 +39,8 @@ export default class OfficerList extends React.Component {
       officerProfileShown: null,
       expandedMap: new Map(),
       columns: getColumnCount(),
-      hoverMap: new Map()})
+      hoverMap: new Map(),
+      officerOverflowHidden: true,})
   }
 
   setHoverState(src, isMouseInside) {
@@ -51,6 +57,12 @@ export default class OfficerList extends React.Component {
     })
   }
 
+  toggleOfficerOverflowHidden() {
+    this.setState({
+      officerOverflowHidden: !this.state.officerOverflowHidden,
+    })
+  }
+
   toggleExpanded(src) {
     const newMap = new Map(this.state.expandedMap);
     const isExpanded = !(newMap.get(src) === true);
@@ -62,11 +74,24 @@ export default class OfficerList extends React.Component {
   }
 
   render() {
-    
     const width = this.state.width;
     const columns = this.state.columns;
 
-    const matrix = getOfficerMatrixFromList(officerData, columns, this.state.expandedMap);
+    var officerDataCopy = officerData.filter((officer) => {
+      console.log(officer.src)
+      return officer.src.length > 0
+    })
+    const maxLength = officerDataCopy.length;
+
+    const tooManyRowsToShow = (columns < 3) && (officerDataCopy.length >= columns*MAX_ROWS);
+
+
+
+    if (tooManyRowsToShow && this.state.officerOverflowHidden === true) {
+      officerDataCopy = officerDataCopy.filter((officer, index) => (index < columns*MAX_ROWS) );
+    }
+
+    const matrix = getOfficerMatrixFromList(officerDataCopy, columns, this.state.expandedMap);
     const styles = {
       root: {
         width: WIDTH*columns,
@@ -89,7 +114,7 @@ export default class OfficerList extends React.Component {
               if (this.state.columns > 2)
                 this.toggleExpanded(src);
               else
-                this.setDialogSrc(getOfficerFromSrc(src, officerData));
+                this.setDialogSrc(getOfficerFromSrc(src, officerDataCopy));
             }, this.state.hoverMap, (src, isMouseInside) => {
               if (this.state.hoverMap.get(src) !== isMouseInside)
                 this.setHoverState(src, isMouseInside);
@@ -97,6 +122,25 @@ export default class OfficerList extends React.Component {
           }      
           </div>
         </div>
+        <div style={{display: 'flex', justifyContent: 'space-around', width: '100%', marginTop: 20}}>
+        {
+            [tooManyRowsToShow].map((bool) => {
+              if (bool === false)
+                return null;
+              else {
+                const moreLabel = "MORE (" + maxLength  + ')'
+                const lessLabel = 'LESS (' + columns*MAX_ROWS + ')'
+                return  <RaisedButton
+                  backgroundColor = {HIGHLIGHT_COLOR}
+                  labelStyle = {{color:'#fff', fontSize:'18px'}}
+                  label={this.state.officerOverflowHidden ? moreLabel : lessLabel}
+                  hoverColor={'#9CCC65'}
+                  primary={true}
+                  onTouchTap={() => {this.toggleOfficerOverflowHidden();}}/>
+              }
+            })
+          }
+          </div>
     </div>
   }
 }///

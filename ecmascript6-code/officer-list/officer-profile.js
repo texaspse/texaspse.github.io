@@ -36,12 +36,13 @@ export default class OfficerProfile extends React.Component {
           title={officer.profile.name + ' - ' + officer.profile.position}
           actions={actions}
           modal={false}
-          open={true}>
+          open={true}
+          autoScrollBodyContent={true}>
 
-          <div style={{color:'white'}}>
-            <p style={{marginTop: 5, lineHeight: '1em'}}><font size="3">{officer.profile.year + ', ' + officer.profile.major}</font></p>
-            <p style={{marginTop: 5, lineHeight: '0.9em'}}><font size="2">{officer.profile.description}</font></p>
-            <p style={{marginTop: 5, lineHeight: '0.9em'}}><font size="2">{(!officer.profile.skills) ? '' : 'Skills: ' + officer.profile.skills}</font></p>
+          <div style={{color:'white', textAlign: 'left'}}>
+            <p style={{marginTop: 5, lineHeight: '1em', textAlign: 'left'}}><font size="3">{officer.profile.year + ', ' + officer.profile.major}</font></p>
+            <p style={{marginTop: 5, lineHeight: '0.9em', textAlign: 'left'}}><font size="2">{officer.profile.description}</font></p>
+            <p style={{marginTop: 5, lineHeight: '0.9em', textAlign: 'left'}}><font size="2">{(!officer.profile.skills) ? '' : 'Skills: ' + officer.profile.skills}</font></p>
           </div>
         </Dialog>
     }

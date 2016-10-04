@@ -1,7 +1,39 @@
-
+//http://www.favewallpapers.com/large/201501/63107.jpg
 export const officerData = [
   {
-    src: 'https://docs.google.com/uc?id=0B0rPW1_c0j-rRVZxNzJWcU5ia2s',
+    src: 'assets/officer-images/quynh.jpg',
+    title: 'President',
+    subtitle: 'Quynh Nguyen',
+    profile: {
+      name: 'Quynh Nguyen',
+      position: 'President',
+      facebookURL: null,
+      githubURL: null,
+      linkedinURL: null,
+      major: 'Petroleum Engineering',
+      year: 'Senior',
+      skills: 'Python, JavaScript, MATLAB, R',
+      description: "Although born and raised in Vietnam, Quynh considers herself a proud Austinite thanks to all the delicious tacos and awesome music. In addition to obtaining her engineering degree, she's also completing certificates in programming and business. She's passionate about doing data analytics, solving engineering challenges using code, and mentoring other students. In her free time, she enjoys watching Netflix, making websites, gardening, biking with her friends, and volunteering around the Austin community.",
+    }
+  },
+  {
+    src: 'assets/officer-images/mark.jpg',
+    title: 'VP Education',
+    subtitle: 'Mark Metzger',
+    profile: {
+      name: 'Mark Metzger',
+      position: 'VP Education',
+      facebookURL: null,
+      githubURL: null,
+      linkedinURL: null,
+      major: 'Petroleum Engineering',
+      year: 'Senior',
+      skills: 'Javascript, Java, Python, C#, Swift, MATLAB',
+      description: "Mark is a senior in Petroleum Engineering. His favorite hobby is making apps, and he has many apps for Android and iOS, and he even helped make this website. Additionally he enjoys biking, juggling, unicycling, and hopes to spread the love of programming through PSE.",
+    }
+  },
+  {
+    src: 'assets/officer-images/anish.jpg',
     title: 'VP Administration',
     subtitle: 'Anish Zute',
     profile: {
@@ -17,19 +49,19 @@ export const officerData = [
     }
   },
   {
-    src: 'assets/officer-images/img2.png',
-    title: 'President',
-    subtitle: 'Quynh Nguyen',
+    src: 'assets/officer-images/miguel.JPG',
+    title: 'Miguel Garza',
+    subtitle: 'VP Finance ',
     profile: {
-      name: 'Quynh Nguyen',
-      position: 'President',
+      name: 'Miguel Garza',
+      position: 'VP Finance ',
       facebookURL: null,
       githubURL: null,
       linkedinURL: null,
-      major: 'Petroleum Engineering',
-      year: 'Senior',
-      skills: 'Python, JavaScript, MATLAB, R',
-      description: "Although born and raised in Vietnam, Quynh considers herself a proud Austinite thanks to all the delicious tacos and awesome music. In addition to obtaining her engineering degree, she's also completing certificates in programming and business. She's passionate about doing data analytics, solving engineering challenges using code, and mentoring other students. In her free time, she enjoys watching Netflix, making websites, gardening, biking with her friends, and volunteering around the Austin community.",
+      major: 'Electrical and Computer Engineering',
+      year: 'Freshman',
+      skills: 'HTML5, CSS, JavaScript, C',
+      description: "Miguel is an ambitious First-year Electrical engineer student eager to learn new foreign language and programming languages . This is includes but not limited to Python, Java, French, Japanese",
     }
   },
   {
@@ -49,7 +81,7 @@ export const officerData = [
     }
   },
     {
-    src: 'assets/officer-images/img4.png',
+    src: '',
     title: 'Corporate Director',
     subtitle: 'Kisnan Ramachan',
     profile: {
@@ -65,7 +97,7 @@ export const officerData = [
     }
   },
   {
-    src: 'assets/officer-images/img5.png',
+    src: '',
     title: 'Media Director',
     subtitle: 'Grace Kim',
     profile: {
@@ -97,7 +129,7 @@ export const officerData = [
     }
   },
   {
-    src: 'na1',
+    src: 'assets/officer-images/brock.jpg',
     title: 'Media Director',
     subtitle: 'Brock Frazier',
     profile: {
@@ -107,13 +139,13 @@ export const officerData = [
       githubURL: null,
       linkedinURL: null,
       major: 'Aerospace Engineering',
-      year: 'Unknown Year',
+      year: 'Freshman',
       skills: 'Python, Bash shell for Linux',
       description: "Dad was F-16 pilot in Air Force, I moved every 2-3 years. Last place I lived before college was Düsseldorf Germany and attended an international high school. I like learning new skills. My main hobbies are anything to do with creating things, woodworking, metalworking, 3D design, graphic design, painting, photography, programming, music. I am getting my private pilots license for fun and am learning guitar. I like good movies and tv and like to pay attention to the quality of cinematography, editing, etc.",
     }
   },
   {
-    src: 'na2',
+    src: '',
     title: 'Instructor',
     subtitle: 'Aaron Comen',
     profile: {
@@ -129,7 +161,7 @@ export const officerData = [
     }
   },
   {
-    src: 'na3',
+    src: 'assets/officer-images/musa.jpg',
     title: 'Membership Director',
     subtitle: 'Musa Rafik',
     profile: {
@@ -145,23 +177,7 @@ export const officerData = [
     }
   },
   {
-    src: 'na4',
-    title: 'VP Education',
-    subtitle: 'Mark Metzger',
-    profile: {
-      name: 'Mark Metzger',
-      position: 'VP Education',
-      facebookURL: null,
-      githubURL: null,
-      linkedinURL: null,
-      major: 'Petroleum Engineering',
-      year: 'Senior',
-      skills: 'Javascript, Java, Python, C#, Swift, MATLAB',
-      description: "Mark is a senior in Petroleum Engineering. His favorite hobby is making apps, and he has many apps for Android and iOS, and he even helped make this website. Additionally he enjoys biking, juggling, unicycling, and hopes to spread the love of programming through PSE.",
-    }
-  },
-  {
-    src: 'na5',
+    src: 'assets/officer-images/art.jpg',
     title: 'Media Director',
     subtitle: 'Art Tuazon',
     profile: {
@@ -177,7 +193,7 @@ export const officerData = [
     }
   },
   {
-    src: 'na6',
+    src: 'assets/officer-images/seong-ho.png',
     title: 'Treasurer',
     subtitle: 'Seong Hyo Ahn',
     profile: {
@@ -193,7 +209,7 @@ export const officerData = [
     }
   },
   {
-    src: 'na7',
+    src: 'assets/officer-images/grace-jiang.jpg',
     title: 'Media Director',
     subtitle: 'Grace Jiang',
     profile: {
@@ -206,6 +222,86 @@ export const officerData = [
       year: 'Freshman',
       skills: 'some Python',
       description: "Grace is a first-year BME major who appreciates a bad pun. She's excited to delve into the possibilities of computational science by learning how to code! Along with PSE, Grace is also learnin' in DECO Learn and Bioinformatics Practicuum. When she's not busy sleeping, Grace enjoys playing tennis, drawing, and 'brushing' up on her painting skills.",
+    }
+  },
+  {
+    src: '',
+    title: 'Steven Kornajcik',
+    subtitle: 'Instructor',
+    profile: {
+      name: 'Steven Kornajcik',
+      position: 'Instructor',
+      facebookURL: null,
+      githubURL: null,
+      linkedinURL: null,
+      major: 'Chemical Engineering',
+      year: 'Sophomore',
+      skills: 'Java, MATLAB',
+      description: "Steven is a Sophomore studying Chemical Engineering with a focus on Energy and Business. He would like to use his degree  in consulting for companies working on renewable energy production. In addition to PSE, he is in engineers for a sustainable world and is involved in the AIChE Chem Car team. His recreational interests include frisbee, rock climbing and hiking.",
+    }
+  },
+  {
+    src: 'assets/officer-images/aditya.jpg',
+    title: 'Aditya Tyagi',
+    subtitle: 'Instructor',
+    profile: {
+      name: 'Aditya Tyagi',
+      position: 'Instructor',
+      facebookURL: 'https://www.facebook.com/aditya.tyagi.581',
+      githubURL: null,
+      linkedinURL: 'https://www.linkedin.com/in/aditya-tyagi-4a8261124?trk=nav_responsive_tab_profile_pic',
+      major: 'Chemical Engineering',
+      year: 'Sophomore',
+      skills: 'Java, some HTML and QBASIC',
+      description: "Aditya Tyagi is a first year Electrical and Computer Engineer at UT, Austin; he is also a part of business foundations program and the Citizen's Police Academy. He aspires to be in the management field of the corporate industry. In addition to PSE, he is a part of the Freshmen Leadership Organization, the Student Judicial Board, the IEEE, and the Indian Cultural Association. Aside from being fairly proficient in Java (3 years in UIL), he also has some exposure in QBASIC and HTML. He is fond of teaching and is looking forward to introduce Java to anyone who'd like to learn!",
+    }
+  },
+  {
+    src: 'assets/officer-images/shaunik.jpg',
+    title: 'Shaunik Bhatte',
+    subtitle: 'SEC Representative',
+    profile: {
+      name: 'Shaunik Bhatte',
+      position: 'SEC Representative',
+      facebookURL: null,
+      githubURL: null,
+      linkedinURL: null,
+      major: 'Petroleum Engineering and Business Administration',
+      year: 'Junior',
+      skills: 'MatLab, Java, LabVIEW',
+      description: "Shaunik is a double major in Petroleum Engineering and Business Administration. He works in Dr. Nguyen's lab, where he researches a novel way to extract bitumen in a more economic way. He is soon to be pursuing a finance degree. He used to live in Louisiana and Pennsylvania and still struggles to suppress both accents, but will never be seen rejecting Cajun food or Philly cheese steaks. In his free time you can catch him watching soccer playing soccer or playing FIFA.",
+    }
+  },
+  {
+    src: 'assets/officer-images/nathan.jpg',
+    title: 'Nathan Seegmiller',
+    subtitle: 'Instructor',
+    profile: {
+      name: 'Nathan Seegmiller',
+      position: 'Instructor',
+      facebookURL: null,
+      githubURL: null,
+      linkedinURL: null,
+      major: 'Computer Science',
+      year: 'Senior',
+      skills: 'C++, Java, Python, JavaScript',
+      description: "Nathan is a Computer Science Senior focusing on Machine Learning, AI, and Big Data. Nathan interned at Amazon here  in Austin over the summer, and will be returning to Amazon here in Austin next summer for a full time postition. In addition to becoming involved in PSE, Nathan is also involved in Texas ACM and E+E Headliners.",
+    }
+  },
+  {
+    src: 'assets/officer-images/max.jpg',
+    title: 'Max Wang',
+    subtitle: 'Instructor',
+    profile: {
+      name: 'Max Wang',
+      position: 'Instructor',
+      facebookURL: null,
+      githubURL: 'http://github.com/maxwang051',
+      linkedinURL: null,
+      major: 'Computer Science',
+      year: 'Junior',
+      skills: 'Python, Java, Some C',
+      description: "Max is passionate about building software that makes a positive impact in people’s lives. He’s also a photographer (instagram.com/waxmang) who likes hiking, backpacking, rock climbing, and Kanye West. He also follows the NBA religiously and his favorite team is the Portland Trailblazers.",
     }
   },
 ];
