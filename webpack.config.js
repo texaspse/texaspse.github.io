@@ -1,5 +1,5 @@
 module.exports = {
-    entry: getEntrySources(['./ecmascript6-code/js/entry.js']),
+    entry: getEntrySources(['./ecmascript6-code/entry.js']),
     output: {
         publicPath: 'http://localhost:8080/',
         filename: 'build/bundle.js'
