@@ -16,6 +16,7 @@ const rootFolderId = '0B_0R926dGCfPRkl3WGFNZWtObkk';
 
 export const BACKGROUND_COLOR = '#1A1314'
 export const HIGHLIGHT_COLOR = '#41D6C3'
+export const APPBAR_COLOR = '#262626'
 
 const DEFAULT_MENU_VALUE = 'All Events'
 const PADDING = 50
@@ -187,7 +188,7 @@ export default class PhotoGallery extends React.Component {
 
 		foldersCopy = foldersCopy.filter(folder => folder.files.length > 0)
 
-		const titleTextSize = (this.state.folder && this.state.width < 500) ? 16 : 24
+		const titleTextSize = (this.state.folder && this.state.width < 500) ? 18 : 18
 
 		var dropDownMenu = <DropDownMenu 
 			        value={this.state.dropdownMenuValue} 
@@ -213,13 +214,13 @@ export default class PhotoGallery extends React.Component {
 				close={() => {this.setImageExpanded(null, null);}}
 				changeIndex={(inc) => {this.incrementImageIndex(inc);}}/>
 		      <AppBar
-		      	style={{marginBottom: 16, backgroundColor: HIGHLIGHT_COLOR, position: 'fixed', top: 0, left: 0}}
+		      	style={{marginBottom: 16, backgroundColor: APPBAR_COLOR, position: 'fixed', top: 0, left: 0}}
 			    title={<span>{getTitleFromState(this.state)}</span>}
-			    titleStyle={{color: 'white', fontSize: titleTextSize}}
+			    titleStyle={{color: HIGHLIGHT_COLOR, fontSize: titleTextSize}}
 			    iconElementLeft={///
 			    	<IconButton 
 			    		onTouchTap={() => {this.backIconClicked()}}
-			    		iconStyle={{width: 50, height: 50, fill: 'rgb(179, 66, 244)'}} 
+			    		iconStyle={{width: 35, height: 35, fill: "#9CCC65"}} 
 			    		style={{width: 50, height: 50, padding: 0,}}>
 			    		<NavigationClose />
 			    	</IconButton>
