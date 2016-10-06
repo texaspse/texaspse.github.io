@@ -16,6 +16,8 @@ export const BACKGROUND_COLOR = '#1A1314'
 export const HIGHLIGHT_COLOR = '#41D6C3'
 const MAX_ROWS = 4
 
+var hoveredRow = 0;
+var animationMap = new Map();
 
 export default class OfficerList extends React.Component {
   constructor(props) {
@@ -77,7 +79,7 @@ export default class OfficerList extends React.Component {
     const width = this.state.width;
     const columns = this.state.columns;
 
-    var officerDataCopy = officerData.filter((officer) => {
+    var officerDataCopy = officerData.filter((officer, index) => {
       console.log(officer.src)
       return officer.src.length > 0
     })
@@ -145,17 +147,23 @@ export default class OfficerList extends React.Component {
   }
 }///
 
+function rowDist(rowIndex) {
+  return Math.abs(rowIndex - hoveredRow);
+}
+
 function getGridListFromMatrix(matrix, columns, expandedMap, onTapFunction, hoverMap, onHoverFunction) {
   const list = [];
   matrix.forEach((row, rowIndex) => {
     row.forEach((tile, columnIndex) => {
       const isExpanded = expandedMap.get(tile.src) === true
       const isMouseInside = hoverMap.get(tile.src) === true
+      const TIME = '0.5s'
 
       const inlineProfileStyle = {
         transitionProperty: 'width,height,top,left',
         zIndex: isExpanded ? 2 : 1, 
-        transitionDuration: '0.5s', 
+        transitionDuration: TIME, 
+        animationDelay: (rowDist(rowIndex) * 0.2) + 's',
         border: '1px solid black', 
         overflow: 'hidden', 
         position: 'absolute', 
@@ -169,7 +177,8 @@ function getGridListFromMatrix(matrix, columns, expandedMap, onTapFunction, hove
       const gridStyle = {
         transitionProperty: 'width,height,top,left', 
         zIndex: isExpanded ? 2 : 1, border: '1px solid black', 
-        transitionDuration: '0.5s', display: 'initial', 
+        transitionDuration: TIME,
+        display: 'initial', 
         position: 'absolute', 
         cursor: 'pointer', 
         top: HEIGHT*rowIndex, 
@@ -187,8 +196,8 @@ function getGridListFromMatrix(matrix, columns, expandedMap, onTapFunction, hove
           <GridTile
               cols={null}
               rows={null}
-              onMouseMove={()=>{if (!isExpanded) onHoverFunction(tile.src, true)}}
-              onMouseLeave={()=>{onHoverFunction(tile.src, false)}}
+              onMouseMove={()=>{hoveredRow = rowIndex; if (!isExpanded) onHoverFunction(tile.src, true)}}
+              onMouseLeave={()=>{hoveredRow = rowIndex; onHoverFunction(tile.src, false)}}
               onTouchTap={() => {onTapFunction(tile.src); onHoverFunction(tile.src, false)}}
               titleBackground={isMouseInside ? 'rgba(0,0,0,0.5)' : 'linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)'}
               title={tile.title}
