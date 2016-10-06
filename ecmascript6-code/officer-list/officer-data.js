@@ -241,7 +241,7 @@ export const officerData = [
     }
   },
   {
-    src: 'assets/officer-images/aditya.jpg',
+    src: 'assets/officer-images/aditya.JPG',
     title: 'Aditya Tyagi',
     subtitle: 'Instructor',
     profile: {
