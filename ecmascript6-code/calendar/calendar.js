@@ -19,7 +19,7 @@ import CalendarInstruction from './calendar-instructions.js'
 import DialogShowingEventDetails from './dialog-with-event-details.js'
 import EventInCell from './event-box-in-cell.js'
 import {MAX_WIDTH_MOBILE_VIEW, BACKGROUND_COLOR, HIGHLIGHT_COLOR} from './styles.js'
-
+import {goto} from './dialog-with-event-details.js'
 
 
 
@@ -48,7 +48,7 @@ export default class Calendar extends React.Component
         // 	alert(JSON.stringify(result))
         // })
 
-
+        extractDataFromDescription('z<RSVP: google.com><rgrbtrbrt>This week, we will review materials from our last workshop with some quick exercises with pandas and Matplotlib, get started with some arrays using numpy and do many, many awesome tricks with it. If you missed our last workshop, please check out our materials from the last 2 weeks. We have recordings, exercises, and a bunch of other helpful materials: http://texaspse.github.io.')
         
 	}
 
@@ -57,7 +57,6 @@ export default class Calendar extends React.Component
 			width: window.innerWidth,
 			height: window.innerHeight,
 			mobileView: isMobileDevice(),})
-		console.log(this.state)
 	}
 
 	componentWillMount() {
@@ -121,6 +120,8 @@ export default class Calendar extends React.Component
 			
 			const columnFlexBox = {display: 'flex', justifyContent: 'space-around', flexDirection: 'column', margin: 25,};
 			const events = getEventObjectsFromResult(this.state.result, this.state.date);
+			console.log('events')
+			console.log(events)
 			const width = this.state.width;
 			const height = this.state.height;
 			const matrix = makeMonthMatrix(this.state.date);
@@ -169,7 +170,7 @@ export default class Calendar extends React.Component
 											<div style={{position: 'relative', width: '100%', height: '100%', paddingTop: 25}}>
 												{
 													[1].map((x) => {
-														if (eventsInCell.length > -1) return <p style={{color: numberColor, position: 'absolute', top: 0, right: 5}}>{sameDates(now(), dateOfCell) ? 'Today!' : day}</p>
+														if (eventsInCell.length > -1) return <p style={{color: numberColor, position: 'absolute', top: 0, right: 5}}>{sameDates(now(), dateOfCell) ? 'Today' : day}</p>
 													})
 												}
 												{
@@ -246,6 +247,14 @@ export default class Calendar extends React.Component
 						const location = event.location ? <p><b style={bStyle}>{'Location: '}</b>{event.location}</p> : <div></div>
 						const description = isExpanded ? <p><b style={bStyle}>{'Description: '}</b>{(event.description || 'None Available')}</p> : <div></div>
 
+						const rsvpButton = <FlatButton
+					        backgroundColor = {HIGHLIGHT_COLOR}
+					        labelStyle = {{color:'#fff', fontSize:'18px'}}
+					        label="RSVP"
+					        style={{margin: 5, width: 20}}
+					        hoverColor={'#9CCC65'}
+					        primary={true}
+					        onTouchTap={() => {goto(event.extraData.RSVP)}}/>
 
 						return <div style={centerFlexbox}>
 							<Paper style={paperStyle} zDepth={3}>
@@ -258,7 +267,8 @@ export default class Calendar extends React.Component
 						          	{description}
 					          	</div>
 					          	<div style={{display: 'flex', justifyContent: 'flex-end'}}>
-					          	<RaisedButton style={{marginLeft:'10px'}} backgroundColor = {HIGHLIGHT_COLOR} labelStyle = {{color:'#fff', fontSize:'16px'}} hoverColor={'#9CCC65'} label={isExpanded ? "Less" : "More"} onTouchTap={()=>{this.toggleExtendedEventDesc(key)}}/>
+					          	<RaisedButton style={{marginLeft:'10px', margin: 5}} backgroundColor = {HIGHLIGHT_COLOR} labelStyle = {{color:'#fff', fontSize:'16px'}} hoverColor={'#9CCC65'} label={isExpanded ? "Less" : "More"} onTouchTap={()=>{this.toggleExtendedEventDesc(key)}}/>
+								{event.extraData.RSVP ? rsvpButton : null}
 								</div>
 
 							</Paper>
@@ -272,6 +282,47 @@ export default class Calendar extends React.Component
 
 function isMobileDevice(){
 	return window.innerWidth <= MAX_WIDTH_MOBILE_VIEW || screen.width <= 480;
+}
+
+function extractDataFromDescription(str){
+
+	if (!str || str.length === 0 || str[0] !== '<')
+		return {newDescription: str, data: {}};
+
+	var c = 0
+	var stack = 0
+	var l = []
+	var s = ''
+	while (stack > 0 || str[c] === '<') {
+		var char = str[c]
+		console.log(char)
+		if (char === '<')
+			stack++;
+		else if (char === '>') {
+			stack--;
+			l.push(s)
+			s = ''
+		}
+		else 
+			s += char
+		c++;
+		if (c >= str.length) {
+			return {newDescription: str, data: {}};
+		}
+	}
+	var data = {}
+	l.forEach((str) => {
+		var index = str.indexOf(':')
+		if (index < 0)
+			data[str] = null
+		else
+			data[str.substring(0,index)] = str.substring(index+1)
+	})
+
+	var returnObject = {newDescription: str.substring(c), data: data};
+
+	console.log(returnObject)
+	return returnObject;
 }
 
 function getBorderFromCell(matrix, dayIndex, rowIndex, cellDate) {
@@ -388,17 +439,20 @@ function sameDates(d1, d2) {
 }
 
 function format(result) {
+	const descriptionData = extractDataFromDescription(result.description)
     return {
         creationDate: moment(result.created).toDate(),
         creator: result.creator,
         startDate: moment(result.start.dateTime).toDate(),
         endDate: moment(result.end.dateTime).toDate(),
-        description: result.description,
+        fullDescription: result.description,
         repeatRule: result.recurrence,
         eventName: result.summary,
         location: result.location,
         id: result.id,
         status: result.status,
+        description: descriptionData.newDescription,
+        extraData: descriptionData.data,
     }
 }
 

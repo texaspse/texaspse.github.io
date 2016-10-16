@@ -50,8 +50,8 @@ export const officerData = [
   },
   {
     src: 'assets/officer-images/miguel.JPG',
-    title: 'Miguel Garza',
-    subtitle: 'VP Finance ',
+    title: 'VP Finance',
+    subtitle: 'Miguel Garza',
     profile: {
       name: 'Miguel Garza',
       position: 'VP Finance ',
@@ -226,8 +226,8 @@ export const officerData = [
   },
   {
     src: '',
-    title: 'Steven Kornajcik',
-    subtitle: 'Instructor',
+    title: 'Instructor',
+    subtitle: 'Steven Kornajcik',
     profile: {
       name: 'Steven Kornajcik',
       position: 'Instructor',
@@ -242,24 +242,24 @@ export const officerData = [
   },
   {
     src: 'assets/officer-images/aditya.JPG',
-    title: 'Aditya Tyagi',
-    subtitle: 'Instructor',
+    title: 'Instructor',
+    subtitle: 'Aditya Tyagi',
     profile: {
       name: 'Aditya Tyagi',
       position: 'Instructor',
       facebookURL: 'https://www.facebook.com/aditya.tyagi.581',
       githubURL: null,
       linkedinURL: 'https://www.linkedin.com/in/aditya-tyagi-4a8261124?trk=nav_responsive_tab_profile_pic',
-      major: 'Chemical Engineering',
-      year: 'Sophomore',
+      major: 'Electrical and Computer Engineering',
+      year: 'Freshaman',
       skills: 'Java, some HTML and QBASIC',
       description: "Aditya Tyagi is a first year Electrical and Computer Engineer at UT, Austin; he is also a part of business foundations program and the Citizen's Police Academy. He aspires to be in the management field of the corporate industry. In addition to PSE, he is a part of the Freshmen Leadership Organization, the Student Judicial Board, the IEEE, and the Indian Cultural Association. Aside from being fairly proficient in Java (3 years in UIL), he also has some exposure in QBASIC and HTML. He is fond of teaching and is looking forward to introduce Java to anyone who'd like to learn!",
     }
   },
   {
     src: 'assets/officer-images/shaunik.jpg',
-    title: 'Shaunik Bhatte',
-    subtitle: 'SEC Representative',
+    title: 'SEC Representative',
+    subtitle: 'Shaunik Bhatte',
     profile: {
       name: 'Shaunik Bhatte',
       position: 'SEC Representative',
@@ -274,8 +274,8 @@ export const officerData = [
   },
   {
     src: 'assets/officer-images/nathan.jpg',
-    title: 'Nathan Seegmiller',
-    subtitle: 'Instructor',
+    title: 'Instructor',
+    subtitle: 'Nathan Seegmiller',
     profile: {
       name: 'Nathan Seegmiller',
       position: 'Instructor',
@@ -290,15 +290,15 @@ export const officerData = [
   },
   {
     src: 'assets/officer-images/max.jpg',
-    title: 'Max Wang',
-    subtitle: 'Instructor',
+    title: 'Instructor',
+    subtitle: 'Max Wang',
     profile: {
       name: 'Max Wang',
       position: 'Instructor',
       facebookURL: null,
       githubURL: 'http://github.com/maxwang051',
       linkedinURL: null,
-      major: 'Computer Science',
+      major: 'Electrical Engineering',
       year: 'Junior',
       skills: 'Python, Java, Some C',
       description: "Max is passionate about building software that makes a positive impact in people’s lives. He’s also a photographer (instagram.com/waxmang) who likes hiking, backpacking, rock climbing, and Kanye West. He also follows the NBA religiously and his favorite team is the Portland Trailblazers.",

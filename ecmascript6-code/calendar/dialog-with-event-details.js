@@ -16,18 +16,29 @@ export default class DialogShowingEventDetails extends React.Component {
   render() {
     const {event, close} = this.props;
     if (!event) return <div></div>;
-
-    const actions = [
-      <FlatButton
+///
+    const action1 = <FlatButton
         backgroundColor = {HIGHLIGHT_COLOR}
         labelStyle = {{color:'#fff', fontSize:'18px'}}
-        label="Got It!"
+        label="Okay"
+        style={{margin: 5}}
         hoverColor={'#9CCC65'}
         primary={true}
         onTouchTap={close}/>
-    ];
+///
+    const action2 = <FlatButton
+        backgroundColor = {HIGHLIGHT_COLOR}
+        labelStyle = {{color:'#fff', fontSize:'18px'}}
+        label="RSVP"
+        style={{margin: 5}}
+        hoverColor={'#9CCC65'}
+        primary={true}
+        onTouchTap={() => {goto(event.extraData.RSVP)}}/>
+///
+    const actions = [action1, event.extraData.RSVP ? action2 : null];
 
       return <Dialog
+          autoScrollBodyContent={true}
           titleStyle={{color: HIGHLIGHT_COLOR}}
           actionsContainerStyle={{paddingBottom:'20px', paddingRight:'20px'}}
           title={event.eventName}
@@ -43,4 +54,13 @@ export default class DialogShowingEventDetails extends React.Component {
           </div>
         </Dialog>
     }
+}
+
+
+
+export function goto(src) {
+  var a = document.createElement('a');
+  a.href = src;
+  document.body.appendChild(a);
+  a.click()
 }
