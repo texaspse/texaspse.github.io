@@ -18,7 +18,7 @@ export const BACKGROUND_COLOR = '#1A1314'
 export const HIGHLIGHT_COLOR = '#41D6C3'
 export const APPBAR_COLOR = '#262626'
 
-const DEFAULT_MENU_VALUE = 'All Eventss'
+const DEFAULT_MENU_VALUE = 'All Events'
 const PADDING = 50
 const MIN_WIDTH = 350;
 
