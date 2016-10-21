@@ -8,7 +8,7 @@ import Subheader from 'material-ui/Subheader';
 import ExpandedImage from './expanded-image.js'
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
-import NavigationClose from 'material-ui/svg-icons/Hardware/keyboard-backspace';
+import NavigationClose from 'material-ui/svg-icons/hardware/keyboard-backspace';
 import AppBar from 'material-ui/AppBar';
 
 const allowedFileTypes = ['image/jpeg', 'image/png']
