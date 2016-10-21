@@ -213,8 +213,8 @@ export const officerData = [
     title: 'Media Director',
     subtitle: 'Grace Jiang',
     profile: {
-      name: 'Seong Hyo Ahn',
-      position: 'Grace Jiang',
+      name: 'Grace Jiang',
+      position: 'Media Director',
       facebookURL: "https://www.facebook.com/grace.jiang.33",
       githubURL: null,
       linkedinURL: null,
@@ -251,7 +251,7 @@ export const officerData = [
       githubURL: null,
       linkedinURL: 'https://www.linkedin.com/in/aditya-tyagi-4a8261124?trk=nav_responsive_tab_profile_pic',
       major: 'Electrical and Computer Engineering',
-      year: 'Freshaman',
+      year: 'Freshman',
       skills: 'Java, some HTML and QBASIC',
       description: "Aditya Tyagi is a first year Electrical and Computer Engineer at UT, Austin; he is also a part of business foundations program and the Citizen's Police Academy. He aspires to be in the management field of the corporate industry. In addition to PSE, he is a part of the Freshmen Leadership Organization, the Student Judicial Board, the IEEE, and the Indian Cultural Association. Aside from being fairly proficient in Java (3 years in UIL), he also has some exposure in QBASIC and HTML. He is fond of teaching and is looking forward to introduce Java to anyone who'd like to learn!",
     }
@@ -302,6 +302,22 @@ export const officerData = [
       year: 'Junior',
       skills: 'Python, Java, Some C',
       description: "Max is passionate about building software that makes a positive impact in people’s lives. He’s also a photographer (instagram.com/waxmang) who likes hiking, backpacking, rock climbing, and Kanye West. He also follows the NBA religiously and his favorite team is the Portland Trailblazers.",
+    }
+  },
+  {
+    src: 'assets/officer-images/miguel-bregon.jpg',
+    title: 'Instructor',
+    subtitle: 'Miguel Obregon',
+    profile: {
+      name: 'Miguel Obregon',
+      position: 'Instructor',
+      facebookURL: null,
+      githubURL: 'http://github.com/m-bot',
+      linkedinURL: 'http://linkedin.com/in/miguelobregon',
+      major: 'Computer Engineering',
+      year: 'Sophomore',
+      skills: 'Java, C/C++, C#, some JavaScript, Python, PHP',
+      description: "Miguel is an Electrical and Computer Engineering sophomore also interested in business and foreign cultures especially Japan. While being very proficient in Java and decent in C++, he has been part of projects involving a wide spectrum of languages including C#, Haskell, JS, PHP, Python, and Ruby. In his free time he enjoys playing MMOs, coding personal projects, and skiing.",
     }
   },
 ];
