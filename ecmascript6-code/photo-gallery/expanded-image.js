@@ -6,8 +6,8 @@ import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import moment from 'moment';
 import {getSrcFromId} from './photo-gallery.js';
-import Left from 'material-ui/svg-icons/Hardware/keyboard-arrow-left';
-import Right from 'material-ui/svg-icons/Hardware/keyboard-arrow-right';
+import Left from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
+import Right from 'material-ui/svg-icons/hardware/keyboard-arrow-right';
 import IconButton from 'material-ui/IconButton';
 import CircularProgress from 'material-ui/CircularProgress';
 
