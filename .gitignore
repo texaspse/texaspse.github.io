@@ -49,3 +49,6 @@ Temporary Items
 # Project ignores
 node_modules/*
 build/*
+
+# Jupiter Notebook temp files
+.ipynb_checkpoints/*
