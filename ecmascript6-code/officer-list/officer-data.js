@@ -80,12 +80,12 @@ export const officerData = [
       description: "Alvin is a junior studying Petroleum Engineering and hopes to work in the IS Department for an oil and gas company.  Outside of PSE, he serves as a Member-At-Large in SEC and is active in AADE, VSA and FSA. In his spare time, he loves to rock climb, hike, and play Ultimate Frisbee.",
     }
   },
-    {
-    src: '',
+  {
+    src: 'assets/officer-images/kishan.jpg',
     title: 'Corporate Director',
-    subtitle: 'Kisnan Ramachan',
+    subtitle: 'Kishan Ramachandran',
     profile: {
-      name: 'Kisnan Ramachan',
+      name: 'Kishan Ramachandran',
       position: 'Corporate Director',
       facebookURL: null,
       githubURL: null,
@@ -93,16 +93,16 @@ export const officerData = [
       major: 'Chemical Engineering',
       year: 'Sophomore',
       skills: 'Java, MATLAB, Python, familiar with C',
-      description: "Kishan is a Sophomore studying Chemical Engineering with a focus on Energy and Business. He would like to use his degree  in consulting for companies working on renewable energy production. In addition to PSE, he is on the business and body team for Longhorn Racing Electric and is involved in the AIChE Chem Car team. His recreational interests include frisbee, soccer, watching movies, photography, and listening to music."
+      description: "Kishan is a Sophomore studying Chemical Engineering with a focus on Energy and Business. He would like to use his degree  in consulting for companies working on renewable energy production. In addition to PSE, he is on the business and body team for Longhorn Racing Electric and is involved in the AIChE Chem Car team. His recreational interests include frisbee, soccer, watching movies, photography, and listening to music.",
     }
   },
   {
-    src: '',
-    title: 'Media Director',
+    src: 'assets/officer-images/grace-kim.png',
+    title: 'Historian/Secretary',
     subtitle: 'Grace Kim',
     profile: {
       name: 'Grace Kim',
-      position: 'Media Director',
+      position: 'Historian/Secretary',
       facebookURL: null,
       githubURL: null,
       linkedinURL: null,
@@ -110,22 +110,6 @@ export const officerData = [
       year: 'Sophomore',
       skills: null,
       description: "Grace is a sophomore Human Development and Family Sciences major. Currently, Grace also serves as a research assistant for the Motivation and Education Research Group (MERG). In her spare time, she enjoys testing new recipes in the kitchen, listening to classical music (mainly Hilary Hahn), and updating her Instagram with food shots.",
-    }
-  },
-  {
-    src: 'assets/officer-images/sid.jpg',
-    title: 'Instructor',
-    subtitle: 'Sid Senthil',
-    profile: {
-      name: 'Sid Senthil',
-      position: 'MATLAB Instructor',
-      facebookURL: null,
-      githubURL: null,
-      linkedinURL: null,
-      major: 'Petroleum Engineering',
-      year: 'Masters Student',
-      skills: 'MatLab, Java, Python',
-      description: "Sid is a Master's student in the Petroleum Engineering department. He works in Dr. DiCarlo's lab, where his research focuses on using nanoparticles to improve the efficiency of CO2 sequestration and enhanced oil recovery. After growing up on Jersey Shore, he moved to Texas because the tacos and BBQ were too good to resist. In addition to trying out new places to eat, he enjoys listening to podcasts, working out, and travelling.",
     }
   },
   {
@@ -145,38 +129,6 @@ export const officerData = [
     }
   },
   {
-    src: '',
-    title: 'Instructor',
-    subtitle: 'Aaron Comen',
-    profile: {
-      name: 'Aaron Comen',
-      position: 'Python Instructor',
-      facebookURL: null,
-      githubURL: null,
-      linkedinURL: null,
-      major: 'Computer Science and Mathematics',
-      year: 'Junior',
-      skills: 'Java, Python, C, C++, Scala, some bash scripting',
-      description: "Aaron is a junior Computer Science and Math major and is perusing the scientific computing and compuational sciences and engineering certificates. In addition to PSE Aaron is captain of the University of Texas Sailing Team. Aaron also works as a peer mentor for the Computational Materials FRI stream and does research on transition state theory through the stream. In his free time Aaron enjoys eating out, watching Netflix, traveling, and programing.",
-    }
-  },
-  {
-    src: 'assets/officer-images/musa.jpg',
-    title: 'Membership Director',
-    subtitle: 'Musa Rafik',
-    profile: {
-      name: 'Musa Rafik',
-      position: 'Membership Director',
-      facebookURL: null,
-      githubURL: null,
-      linkedinURL: null,
-      major: 'Petroleum Engineering',
-      year: 'Junior',
-      skills: 'Python, Java, HTML, R, and some Matlab',
-      description: "Musa is a junior studying Petroleum Engineering. In addition to PSE, he is also involved in Lions Club, IMSA, and TTS as a mentor for transfer students. He enjoys eating out, listening to music (mainly rap, although  he is open to other genres), playing sports, working out, programming and traveling. Musa hopes to eventually make a positive change in the world, starting off by helping others learn how to program!",
-    }
-  },
-  {
     src: 'assets/officer-images/art.jpg',
     title: 'Media Director',
     subtitle: 'Art Tuazon',
@@ -190,22 +142,6 @@ export const officerData = [
       year: 'Freshman',
       skills: 'Java, some HTML and MATLAB',
       description: "Art doesn't do very much :( but she loves cats and is studying chemical engineering in hopes of getting into the oil and gas industry one day. She is active in SASE, AIChE, and ESW. Also active in netflix. She enjoys taking pictures, learning python and html, volunteering,  playing ultimate frisbee, volleyball, and running.",
-    }
-  },
-  {
-    src: 'assets/officer-images/seong-ho.png',
-    title: 'Treasurer',
-    subtitle: 'Seong Hyo Ahn',
-    profile: {
-      name: 'Seong Hyo Ahn',
-      position: 'Treasurer',
-      facebookURL: null,
-      githubURL: null,
-      linkedinURL: null,
-      major: 'Mechanical Engineering',
-      year: 'Sophomore',
-      skills: 'some Python and MATLAB',
-      description: "Seong Hyo Ahn is a second-year mechanical engineering major, pursuing a minor in Chinese. Currently his research interest is in enhancing robot agility through applying the unique locomotion of organisms that live in complex terrestrial environments. He also participates in UT Solar Vehicle Team where he designs the suspensions for the solar vehicle through 3D modeling. In his free time, Seong Hyo enjoys traveling, watching movies and playing Overwatch.",
     }
   },
   {
@@ -225,7 +161,103 @@ export const officerData = [
     }
   },
   {
-    src: '',
+    src: 'assets/officer-images/musa.jpg',
+    title: 'Membership Director',
+    subtitle: 'Musa Rafik',
+    profile: {
+      name: 'Musa Rafik',
+      position: 'Membership Director',
+      facebookURL: null,
+      githubURL: null,
+      linkedinURL: null,
+      major: 'Petroleum Engineering',
+      year: 'Junior',
+      skills: 'Python, Java, HTML, R, and some Matlab',
+      description: "Musa is a junior studying Petroleum Engineering. In addition to PSE, he is also involved in Lions Club, IMSA, and TTS as a mentor for transfer students. He enjoys eating out, listening to music (mainly rap, although  he is open to other genres), playing sports, working out, programming and traveling. Musa hopes to eventually make a positive change in the world, starting off by helping others learn how to program!",
+    }
+  },
+  {
+    src: 'assets/officer-images/shaunik.jpg',
+    title: 'SEC Representative',
+    subtitle: 'Shaunik Bhatte',
+    profile: {
+      name: 'Shaunik Bhatte',
+      position: 'SEC Representative',
+      facebookURL: null,
+      githubURL: null,
+      linkedinURL: null,
+      major: 'Petroleum Engineering and Business Administration',
+      year: 'Junior',
+      skills: 'MatLab, Java, LabVIEW',
+      description: "Shaunik is a double major in Petroleum Engineering and Business Administration. He works in Dr. Nguyen's lab, where he researches a novel way to extract bitumen in a more economic way. He is soon to be pursuing a finance degree. He used to live in Louisiana and Pennsylvania and still struggles to suppress both accents, but will never be seen rejecting Cajun food or Philly cheese steaks. In his free time you can catch him watching soccer playing soccer or playing FIFA.",
+    }
+  },
+  {
+    src: 'assets/officer-images/seong-ho.png',
+    title: 'Treasurer',
+    subtitle: 'Seong Hyo Ahn',
+    profile: {
+      name: 'Seong Hyo Ahn',
+      position: 'Treasurer',
+      facebookURL: null,
+      githubURL: null,
+      linkedinURL: null,
+      major: 'Mechanical Engineering',
+      year: 'Sophomore',
+      skills: 'some Python and MATLAB',
+      description: "Seong Hyo Ahn is a second-year mechanical engineering major, pursuing a minor in Chinese. Currently his research interest is in enhancing robot agility through applying the unique locomotion of organisms that live in complex terrestrial environments. He also participates in UT Solar Vehicle Team where he designs the suspensions for the solar vehicle through 3D modeling. In his free time, Seong Hyo enjoys traveling, watching movies and playing Overwatch.",
+    }
+  },
+  {
+    src: 'assets/officer-images/adam.png',
+    title: 'Treasurer',
+    subtitle: 'Adam Verna',
+    profile: {
+      name: 'Adam Verna',
+      position: 'Treasurer',
+      facebookURL: null,
+      githubURL: null,
+      linkedinURL: null,
+      major: 'Petroleum Engineering',
+      year: 'Junior',
+      skills: 'MATLAB, familiar with  Python, AutoCAD',
+      description: "Adam is a junior studying Petroleum Engineering along with working towards a Business Foundations certificate. He works in a research lab under Dr. Pope where his focus entails enhanced oil recovery. Greatly active in volunteering, Adam founded an organization called Feeding Family, which has provided food to the homeless from local Austin restaurants. He also co-founded a public outreach group called FracPAC that aims to raise awareness regarding hydraulic fracturing. Adam’s recreational activities involve playing football (both real and fantasy), eating sushi at buffets, walking dogs at Austin Animal Shelter, and going on long bike rides.",
+    }
+  },
+  {
+    src: 'assets/officer-images/sid.jpg',
+    title: 'Instructor',
+    subtitle: 'Sid Senthil',
+    profile: {
+      name: 'Sid Senthil',
+      position: 'MATLAB Instructor',
+      facebookURL: null,
+      githubURL: null,
+      linkedinURL: null,
+      major: 'Petroleum Engineering',
+      year: 'Masters Student',
+      skills: 'MatLab, Java, Python',
+      description: "Sid is a Master's student in the Petroleum Engineering department. He works in Dr. DiCarlo's lab, where his research focuses on using nanoparticles to improve the efficiency of CO2 sequestration and enhanced oil recovery. After growing up on Jersey Shore, he moved to Texas because the tacos and BBQ were too good to resist. In addition to trying out new places to eat, he enjoys listening to podcasts, working out, and travelling.",
+    }
+  },
+  {
+    src: 'assets/officer-images/aaron.png',
+    title: 'Instructor',
+    subtitle: 'Aaron Comen',
+    profile: {
+      name: 'Aaron Comen',
+      position: 'Python Instructor',
+      facebookURL: null,
+      githubURL: null,
+      linkedinURL: null,
+      major: 'Computer Science and Mathematics',
+      year: 'Junior',
+      skills: 'Java, Python, C, C++, Scala, some bash scripting',
+      description: "Aaron is a junior Computer Science and Math major and is perusing the scientific computing and compuational sciences and engineering certificates. In addition to PSE Aaron is captain of the University of Texas Sailing Team. Aaron also works as a peer mentor for the Computational Materials FRI stream and does research on transition state theory through the stream. In his free time Aaron enjoys eating out, watching Netflix, traveling, and programing.",
+    }
+  },
+  {
+    src: 'assets/officer-images/steven.png',
     title: 'Instructor',
     subtitle: 'Steven Kornajcik',
     profile: {
@@ -254,22 +286,6 @@ export const officerData = [
       year: 'Freshman',
       skills: 'Java, some HTML and QBASIC',
       description: "Aditya Tyagi is a first year Electrical and Computer Engineer at UT, Austin; he is also a part of business foundations program and the Citizen's Police Academy. He aspires to be in the management field of the corporate industry. In addition to PSE, he is a part of the Freshmen Leadership Organization, the Student Judicial Board, the IEEE, and the Indian Cultural Association. Aside from being fairly proficient in Java (3 years in UIL), he also has some exposure in QBASIC and HTML. He is fond of teaching and is looking forward to introduce Java to anyone who'd like to learn!",
-    }
-  },
-  {
-    src: 'assets/officer-images/shaunik.jpg',
-    title: 'SEC Representative',
-    subtitle: 'Shaunik Bhatte',
-    profile: {
-      name: 'Shaunik Bhatte',
-      position: 'SEC Representative',
-      facebookURL: null,
-      githubURL: null,
-      linkedinURL: null,
-      major: 'Petroleum Engineering and Business Administration',
-      year: 'Junior',
-      skills: 'MatLab, Java, LabVIEW',
-      description: "Shaunik is a double major in Petroleum Engineering and Business Administration. He works in Dr. Nguyen's lab, where he researches a novel way to extract bitumen in a more economic way. He is soon to be pursuing a finance degree. He used to live in Louisiana and Pennsylvania and still struggles to suppress both accents, but will never be seen rejecting Cajun food or Philly cheese steaks. In his free time you can catch him watching soccer playing soccer or playing FIFA.",
     }
   },
   {
@@ -305,7 +321,7 @@ export const officerData = [
     }
   },
   {
-    src: 'assets/officer-images/miguel-bregon.jpg',
+    src: 'assets/officer-images/miguel-obregon.jpg',
     title: 'Instructor',
     subtitle: 'Miguel Obregon',
     profile: {
@@ -314,10 +330,26 @@ export const officerData = [
       facebookURL: null,
       githubURL: 'http://github.com/m-bot',
       linkedinURL: 'http://linkedin.com/in/miguelobregon',
-      major: 'Computer Engineering',
+      major: 'Electrical Engineering',
       year: 'Sophomore',
       skills: 'Java, C/C++, C#, some JavaScript, Python, PHP',
       description: "Miguel is an Electrical and Computer Engineering sophomore also interested in business and foreign cultures especially Japan. While being very proficient in Java and decent in C++, he has been part of projects involving a wide spectrum of languages including C#, Haskell, JS, PHP, Python, and Ruby. In his free time he enjoys playing MMOs, coding personal projects, and skiing.",
     }
-  },
+  }, 
+  {
+    src: 'assets/officer-images/eduardo.png',
+    title: 'Instructor',
+    subtitle: 'Eduardo Priego',
+    profile: {
+      name: 'Eduardo Priego',
+      position: 'Instructor',
+      facebookURL: null,
+      githubURL: null,
+      linkedinURL: null,
+      major: 'Physics',
+      year: 'Senior',
+      skills: 'Python',
+      description: "Eduardo is a senior studying Physics in the Space Sciences track. He works in the Light-Matter Interactions research lab under Dr. Li. In his free time, he enjoys cooking, volunteering, going out with his friends, and watching funny movies.",
+    }
+  }, 
 ];

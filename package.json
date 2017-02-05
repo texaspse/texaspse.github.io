@@ -5,7 +5,8 @@
   "private": true,
   "main": "webpack.config.js",
   "scripts": {
-    "test": "webpack-dev-server"
+    "test": "webpack-dev-server",
+    "prod": "webpack && mv build/bundle.js transpiled-production-code/transpiled-production-code.js"
   },
   "repository": {
     "type": "git",
