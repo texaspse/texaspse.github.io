@@ -81,7 +81,7 @@ export const officerData = [
     }
   },
   {
-    src: 'assets/officer-images/kishan.jpg',
+    src: 'assets/officer-images/kishan.JPG',
     title: 'Corporate Director',
     subtitle: 'Kishan Ramachandran',
     profile: {
