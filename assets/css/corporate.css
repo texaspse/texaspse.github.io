@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,600");
+@import url("font-awesome.min.css");
+
+<!--
+#231F20
+#1A1314
+#41D6C3
+#00E5FF
+#FF6E40
+#9CCC65
+#457492 outline border-bottom
+##6cc6ff main text
+-->
+/*
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+*/
+
+/* Reset */
+
+div#instructions a:visited { color: #FF6E40 !important; }
+div#instructions a:link { color: #9CCC65;}
+div#instructions a:hover { color: #41D6C3; }
