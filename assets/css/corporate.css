@@ -19,6 +19,9 @@
 
 /* Reset */
 
-div#instructions a:visited { color: #FF6E40 !important; }
-div#instructions a:link { color: #9CCC65;}
-div#instructions a:hover { color: #41D6C3; }
+div#instructions a:visited { color: #FF6E40 !important;    font-weight: bold;
+ }
+div#instructions a:link { color: #9CCC65;    font-weight: bold;
+}
+div#instructions a:hover { color: #41D6C3;     font-weight: bold;
+}
